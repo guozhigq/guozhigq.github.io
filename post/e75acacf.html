@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>git代码规范 - 果汁来一杯</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="果汁来一杯"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="果汁来一杯"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="介绍Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。但是在团队开发中，很多不规范的使用，使得 Gitf 分支混乱，代码冲突难以解决，因此我们需要对 Git 提交规范做一些了解。"><meta property="og:type" content="blog"><meta property="og:title" content="git代码规范"><meta property="og:url" content="http://example.com/post/e75acacf.html"><meta property="og:site_name" content="果汁来一杯"><meta property="og:description" content="介绍Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。但是在团队开发中，很多不规范的使用，使得 Gitf 分支混乱，代码冲突难以解决，因此我们需要对 Git 提交规范做一些了解。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:published_time" content="2021-03-29T03:24:17.000Z"><meta property="article:modified_time" content="2021-05-29T06:34:42.000Z"><meta property="article:author" content="果汁"><meta property="article:tag" content="Git"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/post/e75acacf.html"},"headline":"git代码规范","image":["http://example.com/img/og_image.png"],"datePublished":"2021-03-29T03:24:17.000Z","dateModified":"2021-05-29T06:34:42.000Z","author":{"@type":"Person","name":"果汁"},"publisher":{"@type":"Organization","name":"果汁来一杯","logo":{"@type":"ImageObject","url":"http://example.com/img/favicon.svg"}},"description":"介绍Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。但是在团队开发中，很多不规范的使用，使得 Gitf 分支混乱，代码冲突难以解决，因此我们需要对 Git 提交规范做一些了解。"}</script><link rel="canonical" href="http://example.com/post/e75acacf.html"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/favicon.svg" alt="果汁来一杯" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">目录</a><a class="navbar-item" href="/categories">类别</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于我</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/guozhigq"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-03-29T03:24:17.000Z" title="2021/3/29 上午11:24:17">2021-03-29</time>发表</span><span class="level-item"><time dateTime="2021-05-29T06:34:42.000Z" title="2021/5/29 下午2:34:42">2021-05-29</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%88%E7%8E%87%E5%BC%80%E5%8F%91/">效率开发</a></span></div></div><h1 class="title is-3 is-size-4-mobile">git代码规范</h1><div class="content"><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。但是在团队开发中，很多不规范的使用，使得 Gitf 分支混乱，代码冲突难以解决，因此我们需要对 Git 提交规范做一些了解。</p>
+<span id="more"></span>
+
+<h5 id="在多人团队协作中，我们需要对项目代码进行共同对开发管理，在这一过程中，有很多规范需要我们严格执行："><a href="#在多人团队协作中，我们需要对项目代码进行共同对开发管理，在这一过程中，有很多规范需要我们严格执行：" class="headerlink" title="在多人团队协作中，我们需要对项目代码进行共同对开发管理，在这一过程中，有很多规范需要我们严格执行："></a>在多人团队协作中，我们需要对项目代码进行共同对开发管理，在这一过程中，有很多规范需要我们严格执行：</h5><ul>
+<li>拉取最新的 develop 分支到本地</li>
+<li>基于最新的 develop 分支新建你自己的本地分支</li>
+<li>修改代码后，进行 commit 和 push</li>
+<li>切换到 develop 分支并拉取最新的 develop 分支到本地分支</li>
+<li>切换会你自己的本地分支，然后执行命令 git rebase develop 将你的分支变更到最新的 develop 分支</li>
+<li>执行 git push -f 强行推送你变更后的分支</li>
+<li>在 Github 上新建 Pull Request</li>
+</ul>
+<h3 id="commit规范"><a href="#commit规范" class="headerlink" title="commit规范"></a>commit规范</h3><p>Commit 规范采用常用的 Angular 团队所使用的规范，具体如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;&lt;scope&gt;: &lt;subject&gt;</span><br><span class="line">&lt;空行&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;空行&gt;</span><br><span class="line">&lt;footer&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="type规则（必填）"><a href="#type规则（必填）" class="headerlink" title="type规则（必填）"></a>type规则（必填）</h4><p>type 代表本次commit 的类型，有且仅有如下几种：</p>
+<ul>
+<li><strong>feat</strong> - 功能性更新</li>
+<li><strong>fix</strong> - bug修复</li>
+<li><strong>style</strong> - 改变代码格式（如删除空行、格式化代码、去除不必要的分号等等）</li>
+<li><strong>refactor</strong> - 既不是功能更新也不是 bug 修复的更改（建议对代码进行重构的时候使用）</li>
+<li><strong>perf</strong> - 代码改变提高了性能</li>
+<li><strong>test</strong> - 添加测试用例或者修改测试用例</li>
+<li><strong>build</strong> - 由打包工具造成的改变（如gulp、webpack编译文件）</li>
+<li><strong>chore</strong> - 既不是源码的修改，也不是测试用例的修改（修改项目相关配置时可以使用）</li>
+<li><strong>revert</strong> - 撤销之前的提交</li>
+</ul>
+<h4 id="scope-规则（必填）"><a href="#scope-规则（必填）" class="headerlink" title="scope 规则（必填）"></a>scope 规则（必填）</h4><p>scope 代表本次 commit 的影响范围，暂定规则如下：</p>
+<ul>
+<li>本次 commit 修改的组件</li>
+<li>本次 commit 修改的文件</li>
+<li>本次 commit 修改的文件夹</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<ul>
+<li>选取时从上往下匹配</li>
+<li>组件名称应使用大写字字母开头，多个单词每个单词都以大写开头</li>
+<li>文件名应包含完整后缀，如 index.js、.eslintrc.json</li>
+</ul>
+</blockquote>
+<h4 id="subject-规则（必填）"><a href="#subject-规则（必填）" class="headerlink" title="subject 规则（必填）"></a>subject 规则（必填）</h4><p>用一句简短的话描述本次修改的内容，<strong>不要超过30个汉字，以动词开头</strong></p>
+<p>建议选用如下动词：</p>
+<ul>
+<li>新增（组件、属性、事件、API）</li>
+<li>删除</li>
+<li>修正</li>
+<li>修复</li>
+<li>修改</li>
+</ul>
+<p>正确示例：</p>
+<ul>
+<li>新增 Collapse 组件</li>
+<li>新增 top 属性</li>
+<li>删除 color 属性</li>
+<li>修复 direction 属性不生效的问题</li>
+<li>修正 column 属性拼写</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<ul>
+<li>subject 应该仔细斟酌，fix 和 feat 类型的 commit 的 subject 将会出现在更新日志中，</li>
+<li>所以书写时应考虑这句话出现在更新日志中是否合适</li>
+<li>subject 中不要包含组件名或者文件名，因为 scope 中已有对应名称</li>
+</ul>
+</blockquote>
+<h4 id="body-规则（选填）"><a href="#body-规则（选填）" class="headerlink" title="body 规则（选填）"></a>body 规则（选填）</h4><p>如果 subject 无法对本次 commit 进行清楚的阐释，则在 body 中进行补充说明。</p>
+<p>建议填写以下内容：</p>
+<ul>
+<li>为什么进行本次修改</li>
+<li>本次修改了哪些内容</li>
+<li>修改后的影响有哪些</li>
+</ul>
+<blockquote>
+<p>body 需要注意换行问题，不要写在一行不换行，建议在50个字以内进行断句换行。</p>
+</blockquote>
+<h4 id="footer-规则（选填）"><a href="#footer-规则（选填）" class="headerlink" title="footer 规则（选填）"></a>footer 规则（选填）</h4><p>footer 中只填写两种内容：</p>
+<ul>
+<li><p>这次 commit 和某个 issue 相关联，提交后能关闭该 issue，则填写：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">close #<span class="number">748</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fix #<span class="number">745</span></span><br></pre></td></tr></table></figure></li>
+<li><p>这次commit有不兼容上个版本的代码，则以 BREAKING CHANGE: 开头填写不兼容信息，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">BREAKING</span> <span class="attr">CHANGE</span>: <span class="title class_">Message</span>组件top属性单位由px改为rpx</span><br></pre></td></tr></table></figure>
+
+<h4 id="Commit-示例"><a href="#Commit-示例" class="headerlink" title="Commit 示例"></a>Commit 示例</h4><p>一个完整闺房且正确的 Commit 示例如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fix</span>(<span class="title class_">NoticeBar</span>)：修改top属性单位为rpx</span><br><span class="line"></span><br><span class="line"><span class="title class_">NoticeBar</span>组件的top属性单位之前为px，会出现无法自适应的问题。</span><br><span class="line">更改为rpx后可对屏幕进行自适应。</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">BREAKING</span> <span class="attr">CHANGE</span>: <span class="title class_">Notice</span>-<span class="title class_">Bar</span>组件top属性单位由px改为rpx</span><br><span class="line"></span><br><span class="line"><span class="title class_">Close</span> #<span class="number">745</span></span><br></pre></td></tr></table></figure>
+<p>推荐使用 commit 规范信息生成插件</p>
+<blockquote>
+<p>推荐 commit 规范信息生成插件</p>
+<ul>
+<li>WebStorm - Git Commit Template</li>
+<li>Vs Code - Commit Tagger</li>
+</ul>
+</blockquote>
+<h4 id="错误示例"><a href="#错误示例" class="headerlink" title="错误示例"></a>错误示例</h4><ol>
+<li>subject 描述中出现组件名称 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">feat</span>(<span class="title class_">Button</span>): <span class="title class_">Button</span> 组件新增 size 属性</span><br></pre></td></tr></table></figure>
+ 因type（括号中的内容）已经指定了组件，所以 subject 描述信息中无需再指明组件</li>
+<li>单词未添加空格 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">feat</span>(<span class="title class_">Button</span>): 新增size属性</span><br></pre></td></tr></table></figure></li>
+<li>feat、fix 类型需要慎重使用 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">feat</span>(<span class="title class_">Card</span>): 更新 validator 校验器校验规则</span><br></pre></td></tr></table></figure>
+ 因为 feat 和 fix 类型的 commit 信息会出现在 changelog 中，所以要保证这条信息是面向用户的。如上例所示，因为 validator 仅是我们自己内部使用，并不面向用户，所以用户并不关心这个校验器的新增功能。建议使用 chore 代替此处的 feat（chore 的意思是琐碎的事务）</li>
+</ol>
+<h4 id="其他事项"><a href="#其他事项" class="headerlink" title="其他事项"></a>其他事项</h4><p>一个commit应该是一个有意义的commit</p>
+<p>有意义的定义如下： </p>
+<ul>
+<li>新增了一个功能或组件</li>
+<li>修复了一个bug</li>
+<li>解决了一个issue</li>
+<li>重构了某个组件或文件</li>
+<li>改善了现有代码的构建流程或风格</li>
+</ul>
+<p>无意义的定义如下： </p>
+<ul>
+<li>临时工作进度保存</li>
+<li>误提交的 commit</li>
+<li>commit 信息不规范或缺失</li>
+<li>subject 无法准确描述此次 commit</li>
+</ul>
+<blockquote>
+<p>注意：一个 commit 的提交应该保证代码的可运行性和完整性。</p>
+<ul>
+<li>可运行性：commit 提交后，运行代码不能报错</li>
+<li>完整性：commit 提交后，当前代码中不能包含缺失的功能（如某个功能做了一半就提交）</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<!-- #### 扩展阅读
+
++ [虚拟DOM渲染到真实DOM的周期为多久]('')
++ [这个渲染周期又是由什么来决定的]('') -->
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Git/">Git</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/80bad882.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">小程序用户授权又双叒改了</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/a96b66e8.html"><span class="level-item">前后端路由的区别</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar2.png" alt="果汁来一杯"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">果汁来一杯</p><p class="is-size-6 is-block">wechat: guozhigq</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">13</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">6</p></a></div></div></nav></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#介绍"><span class="level-left"><span class="level-item">1</span><span class="level-item">介绍</span></span></a><ul class="menu-list"><ul class="menu-list"><li><a class="level is-mobile" href="#在多人团队协作中，我们需要对项目代码进行共同对开发管理，在这一过程中，有很多规范需要我们严格执行："><span class="level-left"><span class="level-item">1.1.1</span><span class="level-item">在多人团队协作中，我们需要对项目代码进行共同对开发管理，在这一过程中，有很多规范需要我们严格执行：</span></span></a></li></ul></ul></li><li><a class="level is-mobile" href="#commit规范"><span class="level-left"><span class="level-item">2</span><span class="level-item">commit规范</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#type规则（必填）"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">type规则（必填）</span></span></a></li><li><a class="level is-mobile" href="#scope-规则（必填）"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">scope 规则（必填）</span></span></a></li><li><a class="level is-mobile" href="#subject-规则（必填）"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">subject 规则（必填）</span></span></a></li><li><a class="level is-mobile" href="#body-规则（选填）"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">body 规则（选填）</span></span></a></li><li><a class="level is-mobile" href="#footer-规则（选填）"><span class="level-left"><span class="level-item">2.5</span><span class="level-item">footer 规则（选填）</span></span></a></li><li><a class="level is-mobile" href="#Commit-示例"><span class="level-left"><span class="level-item">2.6</span><span class="level-item">Commit 示例</span></span></a></li><li><a class="level is-mobile" href="#错误示例"><span class="level-left"><span class="level-item">2.7</span><span class="level-item">错误示例</span></span></a></li><li><a class="level is-mobile" href="#其他事项"><span class="level-left"><span class="level-item">2.8</span><span class="level-item">其他事项</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/guozhigq" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">我的github</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E6%95%88%E7%8E%87%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">效率开发</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-11T08:08:50.000Z">2023-03-11</time></p><p class="title"><a href="/post/25ae93b9.html">Github Action 自动构建 Flutter Android Apk</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-26T02:10:06.000Z">2023-02-26</time></p><p class="title"><a href="/post/6bb61c1a.html">图床加载失败？我们来看看发生了什么</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-22T07:13:07.000Z">2023-02-22</time></p><p class="title"><a href="/post/a690fcba.html">Flutter 本地持久化与缓存</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-05-28T09:14:34.000Z">2021-05-28</time></p><p class="title"><a href="/post/f3aa05d6.html">Tree shaking是什么？</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-05-28T07:15:41.000Z">2021-05-28</time></p><p class="title"><a href="/post/d9987a00.html">webpack一二三讲</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/"><span class="level-start"><span class="level-item">2023</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/"><span class="level-start"><span class="level-item">2021</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/"><span class="level-start"><span class="level-item">2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/flutter/"><span class="tag">flutter</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vue/"><span class="tag">vue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/"><span class="tag">工程化</span><span class="tag">2</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/favicon.svg" alt="果汁来一杯" height="28"></a><p class="is-size-7"><span>&copy; 2023 果汁</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-right",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

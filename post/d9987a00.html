@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>webpack一二三讲 - 果汁来一杯</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="果汁来一杯"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="果汁来一杯"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="webpack是什么？webpack是一个模块打包工具，可以使用它管理项目中的模块依赖，并编译输出模块所需的静态文件。它可以很好地管理、打包开发中所用到的HTML,CSS,JavaScript和静态文件（图片，字体）等，让开发更高效。对于不同类型的依赖，webpack有对应的模块加载器，而且会分析模块间的依赖关系，最后合并生成优化的静态资源"><meta property="og:type" content="blog"><meta property="og:title" content="webpack一二三讲"><meta property="og:url" content="http://example.com/post/d9987a00.html"><meta property="og:site_name" content="果汁来一杯"><meta property="og:description" content="webpack是什么？webpack是一个模块打包工具，可以使用它管理项目中的模块依赖，并编译输出模块所需的静态文件。它可以很好地管理、打包开发中所用到的HTML,CSS,JavaScript和静态文件（图片，字体）等，让开发更高效。对于不同类型的依赖，webpack有对应的模块加载器，而且会分析模块间的依赖关系，最后合并生成优化的静态资源"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:published_time" content="2021-05-28T07:15:41.000Z"><meta property="article:modified_time" content="2021-05-29T06:34:40.000Z"><meta property="article:author" content="果汁"><meta property="article:tag" content="工程化"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/post/d9987a00.html"},"headline":"webpack一二三讲","image":["http://example.com/img/og_image.png"],"datePublished":"2021-05-28T07:15:41.000Z","dateModified":"2021-05-29T06:34:40.000Z","author":{"@type":"Person","name":"果汁"},"publisher":{"@type":"Organization","name":"果汁来一杯","logo":{"@type":"ImageObject","url":"http://example.com/img/favicon.svg"}},"description":"webpack是什么？webpack是一个模块打包工具，可以使用它管理项目中的模块依赖，并编译输出模块所需的静态文件。它可以很好地管理、打包开发中所用到的HTML,CSS,JavaScript和静态文件（图片，字体）等，让开发更高效。对于不同类型的依赖，webpack有对应的模块加载器，而且会分析模块间的依赖关系，最后合并生成优化的静态资源"}</script><link rel="canonical" href="http://example.com/post/d9987a00.html"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/favicon.svg" alt="果汁来一杯" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">目录</a><a class="navbar-item" href="/categories">类别</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于我</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/guozhigq"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-05-28T07:15:41.000Z" title="2021/5/28 下午3:15:41">2021-05-28</time>发表</span><span class="level-item"><time dateTime="2021-05-29T06:34:40.000Z" title="2021/5/29 下午2:34:40">2021-05-29</time>更新</span></div></div><h1 class="title is-3 is-size-4-mobile">webpack一二三讲</h1><div class="content"><h4 id="webpack是什么？"><a href="#webpack是什么？" class="headerlink" title="webpack是什么？"></a>webpack是什么？</h4><p>webpack是一个模块打包工具，可以使用它管理项目中的模块依赖，并编译输出模块所需的静态文件。它可以很好地管理、打包开发中所用到的HTML,CSS,JavaScript和静态文件（图片，字体）等，让开发更高效。对于不同类型的依赖，webpack有对应的模块加载器，而且会分析模块间的依赖关系，最后合并生成优化的静态资源</p>
+<span id="more"></span>
+<h4 id="webpack基本功能和工作原理"><a href="#webpack基本功能和工作原理" class="headerlink" title="webpack基本功能和工作原理"></a>webpack基本功能和工作原理</h4><ul>
+<li>代码转换：TypeScript 编译成 JavaScript、SCSS 编译成 CSS 等等</li>
+<li>文件优化：压缩 JavaScript、CSS、HTML 代码，压缩合并图片等</li>
+<li>代码分割：提取多个页面的公共代码、提取首屏不需要执行部分的代码让其异步加载</li>
+<li>模块合并：在采用模块化的项目有很多模块和文件，需要构建功能把模块分类合并成一个文件</li>
+<li>自动刷新：监听本地源代码的变化，自动构建，刷新浏览器</li>
+<li>代码校验：在代码被提交到仓库前需要检测代码是否符合规范，以及单元测试是否通过</li>
+<li>自动发布：更新完代码后，自动构建出线上发布代码并传输给发布系统。</li>
+</ul>
+<h4 id="webpack构建过程"><a href="#webpack构建过程" class="headerlink" title="webpack构建过程"></a>webpack构建过程</h4><p>Webpack 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程：</p>
+<ol>
+<li>初始化参数：从配置文件和 Shell 语句中读取与合并参数，得出最终的参数</li>
+<li>开始编译：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，执行对象的 run 方法开始执行编译</li>
+<li>确定入口：根据配置中的 entry 找出所有的入口文件</li>
+<li>编译模块：从入口文件出发，调用所有配置的 Loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理</li>
+<li>完成模块编译：在经过第4步使用 Loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系</li>
+<li>输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会</li>
+<li>输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统</li>
+</ol>
+<p>在以上过程中，Webpack 会在特定的时间点广播出特定的事件，插件在监听到感兴趣的事件后会执行特定的逻辑，并且插件可以调用 Webpack 提供的 API 改变 Webpack 的运行结果。</p>
+<h4 id="webpack-热更新原理"><a href="#webpack-热更新原理" class="headerlink" title="webpack 热更新原理"></a>webpack 热更新原理</h4><p><strong>Webpack</strong> 的热更新又称热替换（<strong>Hot Module Replacement</strong>），缩写为 <strong>HMR</strong>。 这个机制可以做到不用刷新浏览器而将新变更的模块替换掉旧的模块。<br>HMR的核心就是客户端从服务端拉去更新后的文件，准确的说是 <strong>chunk diff</strong> (<strong>chunk</strong> 需要更新的部分)，实际上 <strong>WDS</strong> 与浏览器之间维护了一个 <strong>Websocket</strong>，当本地资源发生变化时，<strong>WDS</strong> 会向浏览器推送更新，并带上构建时的 <strong>hash</strong>，让客户端与上一次资源进行对比。客户端对比出差异后会向 <strong>WDS</strong> 发起 <strong>Ajax</strong> 请求来获取更改内容(文件列表、<strong>hash</strong>)，这样客户端就可以再借助这些信息继续向 <strong>WDS</strong> 发起 <strong>jsonp</strong> 请求获取该chunk的增量更新。<br>后续的部分(拿到增量更新之后如何处理？哪些状态该保留？哪些又需要更新？)由 <strong>HotModulePlugin</strong> 来完成，提供了相关 API 以供开发者针对自身场景进行处理，像<strong>react-hot-loader</strong> 和 <strong>vue-loader</strong> 都是借助这些 API 实现 HMR。</p>
+<h4 id="如何优化-webpack-打包速度？"><a href="#如何优化-webpack-打包速度？" class="headerlink" title="如何优化 webpack 打包速度？"></a>如何优化 webpack 打包速度？</h4><ul>
+<li>使用高版本的 webpack 和 Node.js</li>
+<li>多进程&#x2F;多实例构建：开启 <strong>parallel</strong> 参数，使用多进程压缩</li>
+<li>css压缩：借助 <strong>optimize-css-assets-webpack-plugin</strong> 插件，压缩引擎是 <strong>cssnano</strong></li>
+<li>擦除无用的css：使用 <strong>PurgeCSS</strong> 来完成对无用 css 的擦除，它需要和 <strong>mini-css-extract-plugin</strong> 配合使用。</li>
+<li>图片压缩：配置 <strong>image-webpack-loader</strong>、使用基于 Node 库的 <strong>imagemin</strong></li>
+<li>利用缓存提升二次构建速度：<ul>
+<li>babel-loader 开启缓存</li>
+<li>terser-webpack-plugin 开启缓存</li>
+<li>使用 cache-loader 或者 hard-source-webpack-plugin</li>
+</ul>
+</li>
+<li>Tree shaking (摇树)<ul>
+<li>打包过程中检测工程中没有引用过的模块并进行标记，在资源压缩时将它们从最终的bundle中去掉(只能对ES6 Modlue生效) 开发中尽可能使用ES6 Module的模块，提高tree shaking效率</li>
+<li>禁用 babel-loader 的模块依赖解析，否则 Webpack 接收到的就都是转换过的 CommonJS 形式的模块，无法进行 tree-shaking</li>
+<li>使用 PurifyCSS(不在维护) 或者 uncss 去除无用 CSS 代码<ul>
+<li>purgecss-webpack-plugin 和 mini-css-extract-plugin配合使用(建议)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>合理使用 Ployfill<ul>
+<li>采用 polyfill-service 只给用户返回需要的polyfill</li>
+</ul>
+</li>
+</ul>
+<h4 id="常用的Label有哪些？"><a href="#常用的Label有哪些？" class="headerlink" title="常用的Label有哪些？"></a>常用的Label有哪些？</h4><ul>
+<li>raw-loader：加载文件原始内容（utf-8）</li>
+<li>file-loader：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件 (处理图片和字体)</li>
+<li>url-loader：与 file-loader 类似，区别是用户可以设置一个阈值，大于阈值会交给 file-loader 处理，小于阈值时返回文件 base64 形式编码 (处理图片和字体)</li>
+<li>source-map-loader：加载额外的 Source Map 文件，以方便断点调试</li>
+<li>svg-inline-loader：将压缩后的 SVG 内容注入代码中</li>
+<li>image-loader：加载并且压缩图片文件</li>
+<li>json-loader 加载 JSON 文件（默认包含）</li>
+<li>handlebars-loader: 将 Handlebars 模版编译成函数并返回</li>
+<li>babel-loader：把 ES6 转换成 ES5</li>
+<li>ts-loader: 将 TypeScript 转换成 JavaScript</li>
+<li>awesome-typescript-loader：将 TypeScript 转换成 JavaScript，性能优于 ts-loader</li>
+<li>sass-loader：将SCSS&#x2F;SASS代码转换成CSS</li>
+<li>css-loader：加载 CSS，支持模块化、压缩、文件导入等特性</li>
+<li>style-loader：把 CSS 代码注入到 JavaScript 中，通过 DOM 操作去加载 CSS</li>
+<li>postcss-loader：扩展 CSS 语法，使用下一代 CSS，可以配合 autoprefixer 插件自动补齐 CSS3 前缀</li>
+<li>eslint-loader：通过 ESLint 检查 JavaScript 代码</li>
+<li>tslint-loader：通过 TSLint检查 TypeScript 代码</li>
+<li>mocha-loader：加载 Mocha 测试用例的代码</li>
+<li>coverjs-loader：计算测试的覆盖率</li>
+<li>vue-loader：加载 Vue.js 单文件组件</li>
+<li>i18n-loader: 国际化</li>
+<li>cache-loader: 可以在一些性能开销较大的 Loader 之前添加，目的是将结果缓存到磁盘里</li>
+</ul>
+<h4 id="常用的Plugin有哪些？"><a href="#常用的Plugin有哪些？" class="headerlink" title="常用的Plugin有哪些？"></a>常用的Plugin有哪些？</h4><ul>
+<li>define-plugin：定义环境变量 (Webpack4 之后指定 mode 会自动配置)</li>
+<li>ignore-plugin：忽略部分文件</li>
+<li>html-webpack-plugin：简化 HTML 文件创建 (依赖于 html-loader)</li>
+<li>web-webpack-plugin：可方便地为单页应用输出 HTML，比 html-webpack-plugin 好用</li>
+<li>uglifyjs-webpack-plugin：不支持 ES6 压缩 (Webpack4 以前)</li>
+<li>terser-webpack-plugin: 支持压缩 ES6 (Webpack4)</li>
+<li>webpack-parallel-uglify-plugin: 多进程执行代码压缩，提升构建速度</li>
+<li>mini-css-extract-plugin: 分离样式文件，CSS 提取为独立文件，支持按需加载 (替代extract-text-webpack-plugin)</li>
+<li>serviceworker-webpack-plugin：为网页应用增加离线缓存功能</li>
+<li>clean-webpack-plugin: 目录清理</li>
+<li>ModuleConcatenationPlugin: 开启 Scope Hoisting</li>
+<li>speed-measure-webpack-plugin: 可以看到每个 Loader 和 Plugin 执行耗时 (整个打包耗时、每个 Plugin 和 Loader 耗时)</li>
+<li>webpack-bundle-analyzer: 可视化 Webpack 输出文件的体积 (业务组件、依赖第三方模块)</li>
+</ul>
+<h4 id="Loader和Plugin的区别？"><a href="#Loader和Plugin的区别？" class="headerlink" title="Loader和Plugin的区别？"></a>Loader和Plugin的区别？</h4><ul>
+<li><p>Loader 本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。 因为 Webpack 只认识 JavaScript，所以 Loader 就成了翻译官，对其他类型的资源进行转译的预处理工作。</p>
+</li>
+<li><p>Plugin 就是插件，基于事件流框架 Tapable，插件可以扩展 Webpack 的功能，在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。</p>
+</li>
+<li><p>Loader 在 module.rules 中配置，作为模块的解析规则，类型为数组。每一项都是一个 Object，内部包含了 test(类型文件)、loader、options (参数)等属性。</p>
+</li>
+<li><p>Plugin 在 plugins 中单独配置，类型为数组，每一项是一个 Plugin 的实例，参数都通过构造函数传入。</p>
+</li>
+</ul>
+<h4 id="如何实现一个Loader？"><a href="#如何实现一个Loader？" class="headerlink" title="如何实现一个Loader？"></a>如何实现一个Loader？</h4><p>Loader 支持链式调用，所以开发上需要严格遵循“单一职责”，每个 Loader 只负责自己需要负责的事情。</p>
+<ul>
+<li>Loader 运行在 Node.js 中，我们可以调用任意 Node.js 自带的 API 或者安装第三方模块进行调用</li>
+<li>Webpack 传给 Loader 的原内容都是 UTF-8 格式编码的字符串，当某些场景下 Loader 处理二进制文件时，需要通过 exports.raw &#x3D; true 告诉 Webpack 该 Loader 是否需要二进制数据</li>
+<li>尽可能的异步化 Loader，如果计算量很小，同步也可以</li>
+<li>Loader 是无状态的，我们不应该在 Loader 中保留状态</li>
+<li>使用 loader-utils 和 schema-utils 为我们提供的实用工具</li>
+<li>加载本地 Loader 方法<ul>
+<li>Npm link</li>
+<li>ResolveLoader</li>
+</ul>
+</li>
+</ul>
+<h4 id="如何实现一个Plugin？"><a href="#如何实现一个Plugin？" class="headerlink" title="如何实现一个Plugin？"></a>如何实现一个Plugin？</h4><p>webpack在运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在特定的阶段钩入想要添加的自定义功能。Webpack 的 Tapable 事件流机制保证了插件的有序性，使得整个系统扩展性良好。</p>
+<ul>
+<li>compiler 暴露了和 Webpack 整个生命周期相关的钩子</li>
+<li>compilation 暴露了与模块和依赖有关的粒度更小的事件钩子</li>
+<li>插件需要在其原型上绑定apply方法，才能访问 compiler 实例</li>
+<li>传给每个插件的 compiler 和 compilation对象都是同一个引用，若在一个插件中修改了它们身上的属性，会影响后面的插件</li>
+<li>找出合适的事件点去完成想要的功能<ul>
+<li>emit 事件发生时，可以读取到最终输出的资源、代码块、模块及其依赖，并进行修改(emit 事件是修改 Webpack 输出资源的最后时机)</li>
+<li>watch-run 当依赖的文件发生变化时会触发</li>
+</ul>
+</li>
+<li>异步的事件需要在插件处理完任务时调用回调函数通知 Webpack 进入下一个流程，不然会卡住</li>
+</ul>
+<h4 id="Babel原理"><a href="#Babel原理" class="headerlink" title="Babel原理"></a>Babel原理</h4><p>大多数JavaScript Parser遵循 estree 规范，Babel 最初基于 acorn 项目(轻量级现代 JavaScript 解析器) Babel大概分为三大部分：</p>
+<ul>
+<li>解析：将代码转换成 AST 语法树<ul>
+<li>词法分析：将代码(字符串)分割为token流，即语法单元成的数组</li>
+<li>语法分析：分析token流(上面生成的数组)并生成 AST</li>
+</ul>
+</li>
+<li>转换：访问 AST 的节点进行变换操作生产新的 AST</li>
+<li>生成：以新的 AST 为基础生成代码</li>
+</ul>
+<h4 id="source-Map-是什么？"><a href="#source-Map-是什么？" class="headerlink" title="source Map 是什么？"></a>source Map 是什么？</h4><p>source map 是将编译、打包、压缩后的代码映射回源代码的过程。打包压缩后的代码不具备良好的可读性，想要调试源码就需要 soucre map。<br>map文件只要不打开开发者工具，浏览器是不会加载的。<br>线上环境一般有三种处理方案：</p>
+<p>hidden-source-map：借助第三方错误监控平台 Sentry 使用<br>nosources-source-map：只会显示具体行数以及查看源代码的错误栈。安全性比 sourcemap 高<br>sourcemap：通过 nginx 设置将 .map 文件只对白名单开放(公司内网)</p>
+<p>注意：避免在生产中使用 inline- 和 eval-，因为它们会增加 bundle 体积大小，并降低整体性能。</p>
+<h4 id="代码压缩"><a href="#代码压缩" class="headerlink" title="代码压缩"></a>代码压缩</h4><p>代码分割的本质其实就是在源代码直接上线和打包成唯一脚本main.bundle.js这两种极端方案之间的一种更适合实际场景的中间状态。<br>「用可接受的服务器性能压力增加来换取更好的用户体验。」<br>源代码直接上线：虽然过程可控，但是http请求多，性能开销大。<br>打包成唯一脚本：一把梭完自己爽，服务器压力小，但是页面空白期长，用户体验不好。</p>
+<br/></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/">工程化</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/f3aa05d6.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Tree shaking是什么？</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/5ef4056b.html"><span class="level-item">JS常用的循环遍历</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar2.png" alt="果汁来一杯"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">果汁来一杯</p><p class="is-size-6 is-block">wechat: guozhigq</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">13</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">6</p></a></div></div></nav></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#webpack是什么？"><span class="level-left"><span class="level-item">1</span><span class="level-item">webpack是什么？</span></span></a></li><li><a class="level is-mobile" href="#webpack基本功能和工作原理"><span class="level-left"><span class="level-item">2</span><span class="level-item">webpack基本功能和工作原理</span></span></a></li><li><a class="level is-mobile" href="#webpack构建过程"><span class="level-left"><span class="level-item">3</span><span class="level-item">webpack构建过程</span></span></a></li><li><a class="level is-mobile" href="#webpack-热更新原理"><span class="level-left"><span class="level-item">4</span><span class="level-item">webpack 热更新原理</span></span></a></li><li><a class="level is-mobile" href="#如何优化-webpack-打包速度？"><span class="level-left"><span class="level-item">5</span><span class="level-item">如何优化 webpack 打包速度？</span></span></a></li><li><a class="level is-mobile" href="#常用的Label有哪些？"><span class="level-left"><span class="level-item">6</span><span class="level-item">常用的Label有哪些？</span></span></a></li><li><a class="level is-mobile" href="#常用的Plugin有哪些？"><span class="level-left"><span class="level-item">7</span><span class="level-item">常用的Plugin有哪些？</span></span></a></li><li><a class="level is-mobile" href="#Loader和Plugin的区别？"><span class="level-left"><span class="level-item">8</span><span class="level-item">Loader和Plugin的区别？</span></span></a></li><li><a class="level is-mobile" href="#如何实现一个Loader？"><span class="level-left"><span class="level-item">9</span><span class="level-item">如何实现一个Loader？</span></span></a></li><li><a class="level is-mobile" href="#如何实现一个Plugin？"><span class="level-left"><span class="level-item">10</span><span class="level-item">如何实现一个Plugin？</span></span></a></li><li><a class="level is-mobile" href="#Babel原理"><span class="level-left"><span class="level-item">11</span><span class="level-item">Babel原理</span></span></a></li><li><a class="level is-mobile" href="#source-Map-是什么？"><span class="level-left"><span class="level-item">12</span><span class="level-item">source Map 是什么？</span></span></a></li><li><a class="level is-mobile" href="#代码压缩"><span class="level-left"><span class="level-item">13</span><span class="level-item">代码压缩</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://github.com/guozhigq" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">我的github</span></span><span class="level-right"><span class="level-item tag">github.com</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E6%95%88%E7%8E%87%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">效率开发</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-03-11T08:08:50.000Z">2023-03-11</time></p><p class="title"><a href="/post/25ae93b9.html">Github Action 自动构建 Flutter Android Apk</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-26T02:10:06.000Z">2023-02-26</time></p><p class="title"><a href="/post/6bb61c1a.html">图床加载失败？我们来看看发生了什么</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-22T07:13:07.000Z">2023-02-22</time></p><p class="title"><a href="/post/a690fcba.html">Flutter 本地持久化与缓存</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-05-28T09:14:34.000Z">2021-05-28</time></p><p class="title"><a href="/post/f3aa05d6.html">Tree shaking是什么？</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-05-28T07:15:41.000Z">2021-05-28</time></p><p class="title"><a href="/post/d9987a00.html">webpack一二三讲</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/"><span class="level-start"><span class="level-item">2023</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/"><span class="level-start"><span class="level-item">2021</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/"><span class="level-start"><span class="level-item">2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/flutter/"><span class="tag">flutter</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vue/"><span class="tag">vue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/"><span class="tag">工程化</span><span class="tag">2</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/favicon.svg" alt="果汁来一杯" height="28"></a><p class="is-size-7"><span>&copy; 2023 果汁</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-right",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
