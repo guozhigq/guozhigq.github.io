@@ -107,6 +107,25 @@
     
     
     <entry>
+      <title>浏览器缓存</title>
+      <link href="/post/be7c79f7.html"/>
+      <url>/post/be7c79f7.html</url>
+      
+        <content type="html"><![CDATA[<p>浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。</p><p>概括说明：当我们发起请求时，会先从浏览器缓存中查找是否有缓存数据，</p><ol><li>如果存在，直接返回数据。</li><li>如果不存在或者数据已失效&#x2F;过期，则从服务端获取。<br>即先进行<code>强缓存</code>判断，再与服务端进行<code>协商</code></li></ol><h2 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h2><p>依赖字段： Expires、Cache-Control<br><code>Cache-Control</code>优先于<code>Expires</code></p><h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>来源：上一次响应过程中，服务器在响应头中返回的字段，过期时间，及资源的有效期<br>使用：浏览器在下次发起同一请求时，会通过Expries来判断该请求在本地的缓存是否过期，如果有效则直接读取，否则进行后续逻辑<br>弊端：客户端与服务端时间不一致，倒是命中不准确</p><h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>来源：同 Expires，由上次请求服务端在响应头中返回<br>常见属性：</p><ul><li>max-age：资源有效期，为绝对时间，以秒为单位。比如<code>max-age = 3600</code>表示资源将在1小时后过期，浏览器仔该时间段内直接使用本地缓存，不发起网络请求。</li><li>no-cache：客户端可以缓存资源，每次使用缓存资源前都必须重新验证其有效性。这意味着每次都会发起 HTTP 请求，但当缓存内容仍有效时可以跳过 HTTP 响应体的下载。</li><li>no-store：关闭缓存，即每次请求都不进行缓存是否有效的判断，直接向服务端发起请求。</li><li>public：表明响应可以被任何对象（包括：发送请求的客户端，代理服务器，等等）缓存，即使是通常不可缓存的内容。（例如：1.该响应没有max-age指令或Expires消息头；2. 该响应对应的请求方法是 POST 。）</li><li>private：表明响应只能被单个用户缓存，不能作为共享缓存</li><li>must-revalidate：一旦资源过期（比如已经超过max-age），在成功向原始服务器验证之前，缓存不能用该资源响应后续请求。</li><li>max-age&#x3D;0, must-revalidate：同no-cache</li></ul><h2 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h2><p>如果本地没有缓存和缓存失效，则走协商缓存的逻辑，协商缓存必定会向服务端发起请求。</p><p>依赖字段：Last-Modified 和 If-Modified-Since、ETag 和 If-None-Match （成对出现），服务端响应字段与客户端请求字段相对应</p><h4 id="Last-Modified-和-If-Modified-Since"><a href="#Last-Modified-和-If-Modified-Since" class="headerlink" title="Last-Modified 和 If-Modified-Since"></a>Last-Modified 和 If-Modified-Since</h4><blockquote><p>Last-Modified 服务端响应时返回<br>If-Modified-Since 客户端请求时携带</p></blockquote><p>服务端在响应头中返回 <code>Last-Modified</code> 字段来表示资源的最后修改时间。当客户端发送请求时，在请求头中携带 <code>If-Modified-Since</code> 字段（值为上次获取资源时服务器返回 <code>Last-Modified</code>）。服务端接收到请求后，会将 <code>If-Modified-Since</code> 与服务端资源最后修改时间进行比较。如果资源未被修改，响应 <code>304 Not Modified</code>，告知客户端可以使用本地缓存。否则，响应 <code>200 OK</code>，返回最新的资源以及<code>Last-Modified</code>。</p><h4 id="ETag-和-If-None-Match"><a href="#ETag-和-If-None-Match" class="headerlink" title="ETag 和 If-None-Match"></a>ETag 和 If-None-Match</h4><blockquote><p>ETag 服务端响应时返回<br>If-None-Match 客户端请求时携带</p></blockquote><p>ETag是资源的唯一标识，可以是资源的哈希值、版本号等，随着资源内容生成。</p><p>服务端在响应头中返回 <code>ETag</code> 字段表示资源的唯一性，通常是一个唯一的字符串。当客户端发送请求时，在请求头中携带 <code>If-None-Match</code> 字段（值为上次获取资源时服务端返回 <code>ETag</code>）。服务端接收到请求后，会将 <code>If-None-Match</code> 与服务端资源最新资源的标识进行比较。如果标识符相同，响应 <code>304 Not Modified</code>，告知客户端可以使用本地缓存。否则，响应<code>200 OK</code>，返回最新的资源以及<code>ETag</code>。</p><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul><li>强缓存不会发起请求；协商缓存至少发起一次请求</li><li>🎯命中强缓存，Http状态码为<code>灰色的200</code>；🎯命中协商缓存，Http状态码为<code>304</code></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Tree shaking是什么？</title>
       <link href="/post/f3aa05d6.html"/>
       <url>/post/f3aa05d6.html</url>

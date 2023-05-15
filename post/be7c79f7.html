@@ -4,19 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
-  <title>Flutter 本地持久化与缓存 | 果汁来一杯</title>
+  <title>浏览器缓存 | 果汁来一杯</title>
   <link rel="shortcut icon" href="/img/favicon.png">
-  <meta name="description" content="Flutter 本地持久化与缓存需要使用的插件  dart:io path_provider  涉及到缓存的插件  dio_http_cache get_storage cached_network_image cookJar 3.0.1  dio_http_cache  0.3.0 缓存目录 【可使用 path_provider 提供的 getApplicationDocumentsDirect">
+  <meta name="description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 概括说明：当我们发起请求时，会先从浏览器缓存中查找是否有缓存数据，  如果存在，直接返回数据。 如果不存在或者数据已失效&#x2F;过期，则从服务端获取。即先进行强缓存判断，再与服务端进行协商  强缓存依赖字段： Expires、Cache-ControlCache-Control优先于Expires Expires来源：上一次响应过程中，服">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flutter 本地持久化与缓存">
-<meta property="og:url" content="https://guozhigq.github.io/post/a690fcba.html">
+<meta property="og:title" content="浏览器缓存">
+<meta property="og:url" content="https://guozhigq.github.io/post/be7c79f7.html">
 <meta property="og:site_name" content="果汁来一杯">
-<meta property="og:description" content="Flutter 本地持久化与缓存需要使用的插件  dart:io path_provider  涉及到缓存的插件  dio_http_cache get_storage cached_network_image cookJar 3.0.1  dio_http_cache  0.3.0 缓存目录 【可使用 path_provider 提供的 getApplicationDocumentsDirect">
+<meta property="og:description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 概括说明：当我们发起请求时，会先从浏览器缓存中查找是否有缓存数据，  如果存在，直接返回数据。 如果不存在或者数据已失效&#x2F;过期，则从服务端获取。即先进行强缓存判断，再与服务端进行协商  强缓存依赖字段： Expires、Cache-ControlCache-Control优先于Expires Expires来源：上一次响应过程中，服">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-22T07:13:07.000Z">
-<meta property="article:modified_time" content="2023-03-31T09:25:58.000Z">
+<meta property="article:published_time" content="2022-05-15T07:24:57.000Z">
+<meta property="article:modified_time" content="2023-05-15T08:14:05.655Z">
 <meta property="article:author" content="果汁">
-<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
   
 <link rel="stylesheet" href="/css/style.css">
@@ -115,7 +115,7 @@
     <div class="main-wrap">
       <main class="main-width">
         
-        <h1 class="page-title">Flutter 本地持久化与缓存</h1>
+        <h1 class="page-title">浏览器缓存</h1>
         
         <article class="article page">
   <div class="article-info">
@@ -126,8 +126,8 @@
       <div class="author-name">果汁</div>
       <div class="article-meta-list">
         
-        <time datetime="2023-02-22 15:13:07" title="2023-02-22 15:13:07" class="time">
-          2023-02-22 15:13:07
+        <time datetime="2022-05-15 15:24:57" title="2022-05-15 15:24:57" class="time">
+          2022-05-15 15:24:57
         </time>
         
         <div class="article-meta-item-wrap">
@@ -137,7 +137,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>249</span>
+            <span>1k</span>
           </div>
           
           
@@ -146,7 +146,7 @@
   <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
   <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
 </svg>
-            <span>1min</span>
+            <span>3min</span>
           </div>
           
         </div>
@@ -154,51 +154,38 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><h3 id="Flutter-本地持久化与缓存"><a href="#Flutter-本地持久化与缓存" class="headerlink" title="Flutter 本地持久化与缓存"></a>Flutter 本地持久化与缓存</h3><p>需要使用的插件</p>
+  <div class="article-content"><p>浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。</p>
+<p>概括说明：当我们发起请求时，会先从浏览器缓存中查找是否有缓存数据，</p>
+<ol>
+<li>如果存在，直接返回数据。</li>
+<li>如果不存在或者数据已失效&#x2F;过期，则从服务端获取。<br>即先进行<code>强缓存</code>判断，再与服务端进行<code>协商</code></li>
+</ol>
+<h2 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h2><p>依赖字段： Expires、Cache-Control<br><code>Cache-Control</code>优先于<code>Expires</code></p>
+<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>来源：上一次响应过程中，服务器在响应头中返回的字段，过期时间，及资源的有效期<br>使用：浏览器在下次发起同一请求时，会通过Expries来判断该请求在本地的缓存是否过期，如果有效则直接读取，否则进行后续逻辑<br>弊端：客户端与服务端时间不一致，倒是命中不准确</p>
+<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>来源：同 Expires，由上次请求服务端在响应头中返回<br>常见属性：</p>
 <ul>
-<li>dart:io</li>
-<li>path_provider</li>
+<li>max-age：资源有效期，为绝对时间，以秒为单位。比如<code>max-age = 3600</code>表示资源将在1小时后过期，浏览器仔该时间段内直接使用本地缓存，不发起网络请求。</li>
+<li>no-cache：客户端可以缓存资源，每次使用缓存资源前都必须重新验证其有效性。这意味着每次都会发起 HTTP 请求，但当缓存内容仍有效时可以跳过 HTTP 响应体的下载。</li>
+<li>no-store：关闭缓存，即每次请求都不进行缓存是否有效的判断，直接向服务端发起请求。</li>
+<li>public：表明响应可以被任何对象（包括：发送请求的客户端，代理服务器，等等）缓存，即使是通常不可缓存的内容。（例如：1.该响应没有max-age指令或Expires消息头；2. 该响应对应的请求方法是 POST 。）</li>
+<li>private：表明响应只能被单个用户缓存，不能作为共享缓存</li>
+<li>must-revalidate：一旦资源过期（比如已经超过max-age），在成功向原始服务器验证之前，缓存不能用该资源响应后续请求。</li>
+<li>max-age&#x3D;0, must-revalidate：同no-cache</li>
 </ul>
-<p>涉及到缓存的插件</p>
-<ul>
-<li>dio_http_cache</li>
-<li>get_storage</li>
-<li>cached_network_image</li>
-<li>cookJar 3.0.1</li>
-</ul>
-<p>dio_http_cache</p>
-<ul>
-<li>0.3.0</li>
-<li>缓存目录 【可使用 path_provider 提供的 getApplicationDocumentsDirectory 方法获取到】<ul>
-<li>ios 端 &#x2F;Users&#x2F;user&#x2F;Library&#x2F;Developer&#x2F;CoreSimulator&#x2F;Devices&#x2F;A5F2542D-A814-4A70-8386-71D0094A2BFD&#x2F;data&#x2F;Containers&#x2F;Data&#x2F;Application&#x2F;F9FF16B2-48DB-4003-82F1-35AAA41DC64F&#x2F;Documents</li>
-</ul>
-</li>
-</ul>
-<p>get_storage</p>
-<ul>
-<li>2.0.3</li>
-<li>存储登录状态、用户信息、应用主题、各配置项开关</li>
-<li>缓存目录 【可使用 path_provider 提供的 getApplicationDocumentsDirectory 方法获取到】<ul>
-<li>ios 端 &#x2F;Users&#x2F;user&#x2F;Library&#x2F;Developer&#x2F;CoreSimulator&#x2F;Devices&#x2F;A5F2542D-A814-4A70-8386-71D0094A2BFD&#x2F;data&#x2F;Containers&#x2F;Data&#x2F;Application&#x2F;F9FF16B2-48DB-4003-82F1-35AAA41DC64F&#x2F;Documents</li>
-</ul>
-</li>
-</ul>
-<p>cached_network_image</p>
-<ul>
-<li>3.2.3</li>
-<li>缓存目录<ul>
-<li>ios 端 &#x2F;Users&#x2F;user&#x2F;Library&#x2F;Developer&#x2F;CoreSimulator&#x2F;Devices&#x2F;A5F2542D-A814-4A70-8386-71D0094A2BFD&#x2F;data&#x2F;Containers&#x2F;Data&#x2F;Application&#x2F;F9FF16B2-48DB-4003-82F1-35AAA41DC64F&#x2F;Library&#x2F;Caches&#x2F;libCachedImageData</li>
-</ul>
-</li>
-</ul>
-<p>需要删除的缓存</p>
-<ul>
-<li>dio_http_cache &#x2F;Documents<ul>
-<li>DioCacheManager(CacheConfig(baseUrl: baseUrl)).clearAll() 无效</li>
-<li>需要手动删除 &#x2F;Documents&#x2F;</li>
-</ul>
-</li>
-<li>cached_network_image &#x2F;Library&#x2F;Caches&#x2F;libCachedImageData</li>
+<h2 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h2><p>如果本地没有缓存和缓存失效，则走协商缓存的逻辑，协商缓存必定会向服务端发起请求。</p>
+<p>依赖字段：Last-Modified 和 If-Modified-Since、ETag 和 If-None-Match （成对出现），服务端响应字段与客户端请求字段相对应</p>
+<h4 id="Last-Modified-和-If-Modified-Since"><a href="#Last-Modified-和-If-Modified-Since" class="headerlink" title="Last-Modified 和 If-Modified-Since"></a>Last-Modified 和 If-Modified-Since</h4><blockquote>
+<p>Last-Modified 服务端响应时返回<br>If-Modified-Since 客户端请求时携带</p>
+</blockquote>
+<p>服务端在响应头中返回 <code>Last-Modified</code> 字段来表示资源的最后修改时间。当客户端发送请求时，在请求头中携带 <code>If-Modified-Since</code> 字段（值为上次获取资源时服务器返回 <code>Last-Modified</code>）。服务端接收到请求后，会将 <code>If-Modified-Since</code> 与服务端资源最后修改时间进行比较。如果资源未被修改，响应 <code>304 Not Modified</code>，告知客户端可以使用本地缓存。否则，响应 <code>200 OK</code>，返回最新的资源以及<code>Last-Modified</code>。</p>
+<h4 id="ETag-和-If-None-Match"><a href="#ETag-和-If-None-Match" class="headerlink" title="ETag 和 If-None-Match"></a>ETag 和 If-None-Match</h4><blockquote>
+<p>ETag 服务端响应时返回<br>If-None-Match 客户端请求时携带</p>
+</blockquote>
+<p>ETag是资源的唯一标识，可以是资源的哈希值、版本号等，随着资源内容生成。</p>
+<p>服务端在响应头中返回 <code>ETag</code> 字段表示资源的唯一性，通常是一个唯一的字符串。当客户端发送请求时，在请求头中携带 <code>If-None-Match</code> 字段（值为上次获取资源时服务端返回 <code>ETag</code>）。服务端接收到请求后，会将 <code>If-None-Match</code> 与服务端资源最新资源的标识进行比较。如果标识符相同，响应 <code>304 Not Modified</code>，告知客户端可以使用本地缓存。否则，响应<code>200 OK</code>，返回最新的资源以及<code>ETag</code>。</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
+<li>强缓存不会发起请求；协商缓存至少发起一次请求</li>
+<li>🎯命中强缓存，Http状态码为<code>灰色的200</code>；🎯命中协商缓存，Http状态码为<code>304</code></li>
 </ul>
 </div>
   
@@ -210,8 +197,8 @@
       <div class="article-tags">
         <div class="article-tags-name">标签: </div>
         
-        <a class="article-tags-item" href="/tags/Flutter/">
-          Flutter
+        <a class="article-tags-item" href="/tags/%E7%BD%91%E7%BB%9C/">
+          网络
         </a>
         
       </div>
@@ -233,7 +220,7 @@
   <div class="post-copyright-type">
     <span class="post-copyright-meta">文章链接: </span>
     <span class="post-copyright-info">
-      <a href="https://guozhigq.github.io/post/a690fcba.html">https://guozhigq.github.io/post/a690fcba.html</a>
+      <a href="https://guozhigq.github.io/post/be7c79f7.html">https://guozhigq.github.io/post/be7c79f7.html</a>
     </span>
   </div>
   <div class="post-copyright-notice">
@@ -257,7 +244,7 @@
     <div class="sidebar-title toc-title">目录</div>
     <div class="sidebar-body">
       <ul class="toc-list">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter-%E6%9C%AC%E5%9C%B0%E6%8C%81%E4%B9%85%E5%8C%96%E4%B8%8E%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">Flutter 本地持久化与缓存</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">强缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Expires"><span class="toc-number">1.0.1.</span> <span class="toc-text">Expires</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache-Control"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cache-Control</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Last-Modified-%E5%92%8C-If-Modified-Since"><span class="toc-number">2.0.1.</span> <span class="toc-text">Last-Modified 和 If-Modified-Since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ETag-%E5%92%8C-If-None-Match"><span class="toc-number">2.0.2.</span> <span class="toc-text">ETag 和 If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">区别</span></a></li></ol>
       </ul>
     </div>
   </div>
