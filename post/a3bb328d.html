@@ -4,19 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
-  <title>Tree shaking是什么？ | 果汁来一杯</title>
+  <title>面试官问：输入URL发生了什么 | 果汁来一杯</title>
   <link rel="shortcut icon" href="/img/favicon.png">
-  <meta name="description" content="一直以来都知道在 webpack 打包优化中，有 tree shaking（别名：树摇）这一项优化，却不知道它的工作机制和原理，趁着今天复习知识的空学习一下">
+  <meta name="description" content="老生常谈的面试题了 在浏览器地址栏输入URL发生了什么，主要有以下几个过程： DNS解析 浏览器校验输入内容是否为有效地址，否则发起搜索 进行DNS解析，以此从浏览器缓存、系统缓存、路由器缓存、ISP缓存中获取服务器的IP地址，端口号 利用IP地址和远程服务器建立TCP连接，三次握手 构建请求头信息，发起请求  请求发送&#x2F;响应 发起请求时会检查浏览器缓存，涉及强缓存、协商缓存，如果命中强">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tree shaking是什么？">
-<meta property="og:url" content="https://guozhigq.github.io/post/f3aa05d6.html">
+<meta property="og:title" content="面试官问：输入URL发生了什么">
+<meta property="og:url" content="https://guozhigq.github.io/post/a3bb328d.html">
 <meta property="og:site_name" content="果汁来一杯">
-<meta property="og:description" content="一直以来都知道在 webpack 打包优化中，有 tree shaking（别名：树摇）这一项优化，却不知道它的工作机制和原理，趁着今天复习知识的空学习一下">
+<meta property="og:description" content="老生常谈的面试题了 在浏览器地址栏输入URL发生了什么，主要有以下几个过程： DNS解析 浏览器校验输入内容是否为有效地址，否则发起搜索 进行DNS解析，以此从浏览器缓存、系统缓存、路由器缓存、ISP缓存中获取服务器的IP地址，端口号 利用IP地址和远程服务器建立TCP连接，三次握手 构建请求头信息，发起请求  请求发送&#x2F;响应 发起请求时会检查浏览器缓存，涉及强缓存、协商缓存，如果命中强">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-28T09:14:34.000Z">
-<meta property="article:modified_time" content="2023-03-31T03:18:35.000Z">
+<meta property="article:published_time" content="2020-05-15T06:55:32.000Z">
+<meta property="article:modified_time" content="2023-05-15T07:19:03.885Z">
 <meta property="article:author" content="果汁">
-<meta property="article:tag" content="工程化">
 <meta name="twitter:card" content="summary">
   
 <link rel="stylesheet" href="/css/style.css">
@@ -115,7 +114,7 @@
     <div class="main-wrap">
       <main class="main-width">
         
-        <h1 class="page-title">Tree shaking是什么？</h1>
+        <h1 class="page-title">面试官问：输入URL发生了什么</h1>
         
         <article class="article page">
   <div class="article-info">
@@ -126,8 +125,8 @@
       <div class="author-name">果汁</div>
       <div class="article-meta-list">
         
-        <time datetime="2021-05-28 17:14:34" title="2021-05-28 17:14:34" class="time">
-          2021-05-28 17:14:34
+        <time datetime="2020-05-15 14:55:32" title="2020-05-15 14:55:32" class="time">
+          2020-05-15 14:55:32
         </time>
         
         <div class="article-meta-item-wrap">
@@ -137,7 +136,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>316</span>
+            <span>321</span>
           </div>
           
           
@@ -154,39 +153,33 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>一直以来都知道在 webpack 打包优化中，有 tree shaking（别名：树摇）这一项优化，却不知道它的工作机制和原理，趁着今天复习知识的空学习一下</p>
-<span id="more"></span>
-
-<h4 id="tree-shaking-是什么？"><a href="#tree-shaking-是什么？" class="headerlink" title="tree shaking 是什么？"></a>tree shaking 是什么？</h4><p><strong>tree shaking</strong>，别名：树摇，最早是由<strong>Rollup</strong>实现。根据字面意思我们可以把它理解成一种工具，可以“摇动”我们的 JS 文件，将其中用不到的代码“摇”掉，属于性能优化的一部分。具体到实际场景中来看，我们在 webpack 项目中，会有一个入口文件，会有很多的依赖模块挂载在 index.js 下，但是我们只会用到其中的一部分，造成内存空间浪费， tree shaking 就可以将无用的模块剔除掉，实现代码体积优化的效果。</p>
-<h4 id="tree-shaking-的工作机制"><a href="#tree-shaking-的工作机制" class="headerlink" title="tree shaking 的工作机制"></a>tree shaking 的工作机制</h4><p>因为 tree shaking 只能在静态的 modules 下工作，所以直到 ES6 的 import 语法中才可以完美使用。</p>
-<!-- 虽然tree shaking 的概念很早就被提了出来，但是真正被利用却是在最近几年，一切都是因为它依赖于ES6的模块特征。
-我们回顾一下ES6 module 的特点：
-+ 只能作为模块顶层语句出现
-+ import 的模块名只能是字符串常量
-+ import binding 是 immutable的 -->
-<!-- ES6模块依赖关系是确定的，和运行时的状态无关，所以可以进行可靠的静态分析。而 ComminJS 以 require() 引入模块是动态的，无法在运行前确定实际运行中需要的模块。 -->
-
-<h4 id="tree-shaking-的原理是什么？"><a href="#tree-shaking-的原理是什么？" class="headerlink" title="tree shaking 的原理是什么？"></a>tree shaking 的原理是什么？</h4><ul>
-<li>ES6 Module 引入进行静态分析，故而编译的时候正确判断到底加载了那些模块</li>
-<li>静态分析程序流，判断那些模块和变量未被使用或者引用，进而删除对应代码</li>
+  <div class="article-content"><p>老生常谈的面试题了</p>
+<p>在浏览器地址栏输入URL发生了什么，主要有以下几个过程：</p>
+<h3 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h3><ul>
+<li>浏览器校验输入内容是否为有效地址，否则发起搜索</li>
+<li>进行DNS解析，以此从浏览器缓存、系统缓存、路由器缓存、ISP缓存中获取服务器的IP地址，端口号</li>
+<li>利用IP地址和远程服务器建立TCP连接，三次握手</li>
+<li>构建请求头信息，发起请求</li>
+</ul>
+<h3 id="请求发送-x2F-响应"><a href="#请求发送-x2F-响应" class="headerlink" title="请求发送&#x2F;响应"></a>请求发送&#x2F;响应</h3><ul>
+<li>发起请求时会检查浏览器缓存，涉及<code>强缓存</code>、<code>协商缓存</code>，如果命中强缓存和协商后缓存未过期，直接从缓存中获取数据，否则获取响应数据</li>
+<li>检查响应类型Content-Type，字节流类型调用下载管理器，否则通知浏览器进程准备渲染进程准备进行渲染</li>
+<li>断开链接 四次挥手</li>
+</ul>
+<h3 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h3><ul>
+<li>获取HTML原始字节，根据文件指定编码（UTF-8）进行转换</li>
+<li>词法分析</li>
+<li>构建DOM   <ul>
+<li>DOM树跟CSSOM合成生成渲染树</li>
+<li>渲染树只包含渲染网页所需的节点</li>
+<li>布局计算每个对象的位置跟大小</li>
+<li>绘制，将渲染树渲染到屏幕上</li>
+</ul>
+</li>
 </ul>
 </div>
   
   <div class="article-end">
-    
-    <div class="article-meta">
-      
-      
-      <div class="article-tags">
-        <div class="article-tags-name">Tags: </div>
-        
-        <a class="article-tags-item" href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/">
-          工程化
-        </a>
-        
-      </div>
-      
-    </div>
     
     
 
@@ -203,7 +196,7 @@
   <div class="post-copyright-type">
     <span class="post-copyright-meta">Article Link: </span>
     <span class="post-copyright-info">
-      <a href="https://guozhigq.github.io/post/f3aa05d6.html">https://guozhigq.github.io/post/f3aa05d6.html</a>
+      <a href="https://guozhigq.github.io/post/a3bb328d.html">https://guozhigq.github.io/post/a3bb328d.html</a>
     </span>
   </div>
   <div class="post-copyright-notice">
@@ -227,7 +220,7 @@
     <div class="sidebar-title toc-title">Catalog</div>
     <div class="sidebar-body">
       <ul class="toc-list">
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#tree-shaking-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">tree shaking 是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tree-shaking-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">tree shaking 的工作机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tree-shaking-%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">tree shaking 的原理是什么？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E8%A7%A3%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">DNS解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%91%E9%80%81-x2F-%E5%93%8D%E5%BA%94"><span class="toc-number">2.</span> <span class="toc-text">请求发送&#x2F;响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93"><span class="toc-number">3.</span> <span class="toc-text">浏览器渲染</span></a></li></ol>
       </ul>
     </div>
   </div>

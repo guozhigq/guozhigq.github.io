@@ -313,6 +313,19 @@
     </entry>
     
     
+    
+    <entry>
+      <title>面试官问：输入URL发生了什么</title>
+      <link href="/post/a3bb328d.html"/>
+      <url>/post/a3bb328d.html</url>
+      
+        <content type="html"><![CDATA[<p>老生常谈的面试题了</p><p>在浏览器地址栏输入URL发生了什么，主要有以下几个过程：</p><h3 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h3><ul><li>浏览器校验输入内容是否为有效地址，否则发起搜索</li><li>进行DNS解析，以此从浏览器缓存、系统缓存、路由器缓存、ISP缓存中获取服务器的IP地址，端口号</li><li>利用IP地址和远程服务器建立TCP连接，三次握手</li><li>构建请求头信息，发起请求</li></ul><h3 id="请求发送-x2F-响应"><a href="#请求发送-x2F-响应" class="headerlink" title="请求发送&#x2F;响应"></a>请求发送&#x2F;响应</h3><ul><li>发起请求时会检查浏览器缓存，涉及<code>强缓存</code>、<code>协商缓存</code>，如果命中强缓存和协商后缓存未过期，直接从缓存中获取数据，否则获取响应数据</li><li>检查响应类型Content-Type，字节流类型调用下载管理器，否则通知浏览器进程准备渲染进程准备进行渲染</li><li>断开链接 四次挥手</li></ul><h3 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h3><ul><li>获取HTML原始字节，根据文件指定编码（UTF-8）进行转换</li><li>词法分析</li><li>构建DOM   <ul><li>DOM树跟CSSOM合成生成渲染树</li><li>渲染树只包含渲染网页所需的节点</li><li>布局计算每个对象的位置跟大小</li><li>绘制，将渲染树渲染到屏幕上</li></ul></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
   
   
 </search>
