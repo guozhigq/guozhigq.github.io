@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://guozhigq.github.io/img/event_loop.png">
 <meta property="article:published_time" content="2023-05-15T13:11:15.000Z">
-<meta property="article:modified_time" content="2023-05-16T10:11:00.993Z">
+<meta property="article:modified_time" content="2023-05-16T12:02:30.370Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="浏览器">
 <meta name="twitter:card" content="summary">
@@ -139,7 +139,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>1.1k</span>
+            <span>1.2k</span>
           </div>
           
           
@@ -148,7 +148,7 @@
   <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
   <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
 </svg>
-            <span>3min</span>
+            <span>4min</span>
           </div>
           
         </div>
@@ -197,9 +197,10 @@
         <span class="copy-code">COPY</span>
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// setTimeout设置为0时也属于宏任务</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ... ...</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-
+<p>注意：在每个循环的末尾，会进行一次dom的更新渲染，vue中$nextTick与此有异曲同工之处，或者说是借鉴了这里</p>
 <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
 <li>使用 <code>setTimeout</code>对不重要的事件，同步任务异步化，避免主线程阻塞</li>
+<li>$nextTick的实现：$nextTick内部实现优先级：微任务setImmediate、微任务MessageChannel、宏任务setTimeout、Promise.then</li>
 <li>待补充</li>
 </ul>
 <h2 id="nodejs事件循环"><a href="#nodejs事件循环" class="headerlink" title="nodejs事件循环"></a>nodejs事件循环</h2><p>待补充</p>
