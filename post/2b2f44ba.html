@@ -14,7 +14,7 @@
 <meta property="og:description" content="自从 JavaScript 诞生以来，人们一直将它作为一种网页脚本语言，一般只用作表单校验跟页面特效，由于被仓促的创造出来，所以它自身的各种陷阱和缺点也被编程人员所诟病。随着 Web2.0 的流行，各种前端库和框架被开发出来，随后随着更多的用户需求在前端被实现，JavaScript 也从表单校验跃迁到应用开发的级别上。在这个过程中，它大致经历了工具类库、组件库、前端框架、前端应用的变迁。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-31T03:20:17.000Z">
-<meta property="article:modified_time" content="2023-05-15T13:09:36.599Z">
+<meta property="article:modified_time" content="2023-05-16T08:48:04.850Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="工程化">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
       <nav>
         
         <div class="search" tabindex="-1">
-          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <input class="search-input" placeholder="搜索文章" type="search" maxlength="64">
           <div class="seach-icon-container">
             <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
@@ -64,8 +64,8 @@
           </div>
           <div class="search-history">
             <div class="search-history-title">
-              <span>Search for History</span>
-              <span class="search-history-clear">Clear</span>
+              <span>搜索历史</span>
+              <span class="search-history-clear">清空</span>
             </div>
             <div class="search-history-list"></div>
           </div>
@@ -137,7 +137,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>1.1k</span>
+            <span>1.8k</span>
           </div>
           
           
@@ -146,7 +146,7 @@
   <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
   <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
 </svg>
-            <span>4min</span>
+            <span>7min</span>
           </div>
           
         </div>
@@ -268,7 +268,32 @@
 
 
 
-<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>在webpack中如何完成 <code>commonjs</code> 到 <code>esmodule</code> 的转换的</p>
+<p>但是但是，在日常开发中我们发现以<code>CommonJs</code>模式引入的插件也可以跑在浏览器中，这是为什呢？</p>
+<p>概括的来说，<code>webpack</code>会根据webpack.config.js入口文件识别模块依赖，统一对模块进行分析，通过转换、编译，打包成最终的文件。最终文件中的模块实现是基于webpack自己实现的 <code>webpack_require</code>（es5代码），所以打包后的文件可以跑在浏览器上。即 <strong>webpack会对各种模块进行语法分析，并做转换编译</strong></p>
+<p>来看看<code>webpack</code>对此做了些什么：</p>
+<ul>
+<li><p>简单的对webpack进行配置：</p>
+<figure class="highlight js">
+      <div class="code-block-header" lang="js">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/main.js&#x27;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;./dist&#x27;</span>),</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>创建一个EsModule格式的模块并导入</p>
+<figure class="highlight js">
+      <div class="code-block-header" lang="js">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// src/add</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; name &#125; = &#123; <span class="attr">name</span>: <span class="string">&#x27;hello world,&#x27;</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> name + a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// src/main.js</span></span><br><span class="line"><span class="keyword">import</span> add <span class="keyword">from</span> <span class="string">&#x27;./add&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;求和&#x27;</span>, <span class="title function_">add</span>(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打包完成后的<code>bundle.js</code>文件输出如下:</p>
+</li>
+</ul>
+<figure class="highlight js">
+      <div class="code-block-header" lang="js">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// modules是存放所有模块的数组，数组中每个元素存储&#123; 模块路径: 模块导出代码函数 &#125;</span></span><br><span class="line">(<span class="keyword">function</span>(<span class="params">modules</span>) &#123;</span><br><span class="line"><span class="comment">// 模块缓存作用，已加载的模块可以不用再重新读取，提升性能</span></span><br><span class="line"><span class="keyword">var</span> installedModules = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关键函数，加载模块代码</span></span><br><span class="line"><span class="comment">// 形式有点像Node的CommonJS模块，但这里是可跑在浏览器上的es5代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">__webpack_require__</span>(<span class="params">moduleId</span>) &#123;</span><br><span class="line">  <span class="comment">// 缓存中存在则直接导出</span></span><br><span class="line">  <span class="keyword">if</span>(installedModules[moduleId]) &#123;</span><br><span class="line">    <span class="keyword">return</span> installedModules[moduleId].<span class="property">exports</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 否则新建</span></span><br><span class="line">  <span class="keyword">var</span> <span class="variable language_">module</span> = installedModules[moduleId] = &#123;</span><br><span class="line">    <span class="attr">i</span>: moduleId,</span><br><span class="line">    <span class="attr">l</span>: <span class="literal">false</span>, <span class="comment">// 标记是否已经加载</span></span><br><span class="line">    <span class="attr">exports</span>: &#123;&#125; <span class="comment">// 初始模块为空</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 把要加载的模块内容，挂载到module.exports上</span></span><br><span class="line">  modules[moduleId].<span class="title function_">call</span>(<span class="variable language_">module</span>.<span class="property">exports</span>, <span class="variable language_">module</span>, <span class="variable language_">module</span>.<span class="property">exports</span>, __webpack_require__);</span><br><span class="line">  <span class="variable language_">module</span>.<span class="property">l</span> = <span class="literal">true</span>; <span class="comment">// 标记为已加载</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 返回加载的模块，调用方直接调用即可</span></span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">module</span>.<span class="property">exports</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// __webpack_require__对象下的r函数</span></span><br><span class="line"><span class="comment">// 在module.exports上定义__esModule为true，表明是一个模块对象</span></span><br><span class="line">__webpack_require__.<span class="property">r</span> = <span class="keyword">function</span>(<span class="params"><span class="built_in">exports</span></span>) &#123;</span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="built_in">exports</span>, <span class="string">&#x27;__esModule&#x27;</span>, &#123; <span class="attr">value</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动入口模块main.js</span></span><br><span class="line"><span class="keyword">return</span> <span class="title function_">__webpack_require__</span>(__webpack_require__.<span class="property">s</span> = <span class="string">&quot;./src/main.js&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">(&#123;</span><br><span class="line">  <span class="comment">// add模块</span></span><br><span class="line">  <span class="string">&quot;./src/add.js&quot;</span>: (<span class="keyword">function</span>(<span class="params"><span class="variable language_">module</span>, __webpack_exports__, __webpack_require__</span>) &#123;</span><br><span class="line">    <span class="comment">// 在module.exports上定义__esModule为true</span></span><br><span class="line">    __webpack_require__.<span class="title function_">r</span>(__webpack_exports__);</span><br><span class="line">    <span class="comment">// 直接把add模块内容，赋给module.exports.default对象上</span></span><br><span class="line">    __webpack_exports__[<span class="string">&quot;default&quot;</span>] = (<span class="keyword">function</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> &#123; name &#125; = &#123; <span class="attr">name</span>: <span class="string">&#x27;hello world,&#x27;</span>&#125;</span><br><span class="line">      <span class="keyword">return</span> name + a + b</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 入口模块</span></span><br><span class="line">  <span class="string">&quot;./src/main.js&quot;</span>: (<span class="keyword">function</span>(<span class="params"><span class="variable language_">module</span>, __webpack_exports__, __webpack_require__</span>) &#123;</span><br><span class="line">    __webpack_require__.<span class="title function_">r</span>(__webpack_exports__)</span><br><span class="line">    <span class="comment">// 拿到add模块的定义</span></span><br><span class="line">    <span class="comment">// _add__WEBPACK_IMPORTED_MODULE_0__ = module.exports，有点类似require</span></span><br><span class="line">    <span class="keyword">var</span> _add__WEBPACK_IMPORTED_MODULE_0__ = <span class="title function_">__webpack_require__</span>(<span class="string">&quot;./src/add.js&quot;</span>);</span><br><span class="line">    <span class="comment">// add模块内容: _add__WEBPACK_IMPORTED_MODULE_0__[&quot;default&quot;]</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(_add__WEBPACK_IMPORTED_MODULE_0__[<span class="string">&quot;default&quot;</span>], <span class="title class_">Object</span>(_add__WEBPACK_IMPORTED_MODULE_0__[<span class="string">&quot;default&quot;</span>])(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>至此，打包后的代码直接跑在浏览器中，是因为webpack通过__webpack_require__ 函数模拟了模块的加载，并使用<code>module.exports</code> 导出。</p>
 </div>
   
   <div class="article-end">
@@ -276,7 +301,7 @@
     <div class="article-meta">
       
       <div class="article-categories">
-        <div class="article-categories-name">Categories: </div>
+        <div class="article-categories-name">分类: </div>
         
         <a class="article-categories-item" href="/categories/%E6%8B%93%E5%B1%95/">
           拓展
@@ -286,7 +311,7 @@
       
       
       <div class="article-tags">
-        <div class="article-tags-name">Tags: </div>
+        <div class="article-tags-name">标签: </div>
         
         <a class="article-tags-item" href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/">
           工程化
@@ -303,19 +328,19 @@
   <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm117.134 346.753c-1.592 1.867-39.776 45.731-109.851 45.731-84.692 0-144.484-63.26-144.484-145.567 0-81.303 62.004-143.401 143.762-143.401 66.957 0 101.965 37.315 103.422 38.904a12 12 0 0 1 1.238 14.623l-22.38 34.655c-4.049 6.267-12.774 7.351-18.234 2.295-.233-.214-26.529-23.88-61.88-23.88-46.116 0-73.916 33.575-73.916 76.082 0 39.602 25.514 79.692 74.277 79.692 38.697 0 65.28-28.338 65.544-28.625 5.132-5.565 14.059-5.033 18.508 1.053l24.547 33.572a12.001 12.001 0 0 1-.553 14.866z" />
 </svg></div>
   <div class="post-copyright-author">
-    <span class="post-copyright-meta">Authorship: </span>
+    <span class="post-copyright-meta">作者: </span>
     <span class="post-copyright-info">
       <a href="https://guozhigq.github.io">果汁</a>
     </span>
   </div>
   <div class="post-copyright-type">
-    <span class="post-copyright-meta">Article Link: </span>
+    <span class="post-copyright-meta">文章链接: </span>
     <span class="post-copyright-info">
       <a href="https://guozhigq.github.io/post/2b2f44ba.html">https://guozhigq.github.io/post/2b2f44ba.html</a>
     </span>
   </div>
   <div class="post-copyright-notice">
-    <span class="post-copyright-meta">Copyright: </span>
+    <span class="post-copyright-meta">版权声明: </span>
     <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="https://guozhigq.github.io" target="_blank">果汁来一杯</a> !</span>
   </div>
 </div>
@@ -332,10 +357,10 @@
   <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
 </svg>
     </div>
-    <div class="sidebar-title toc-title">Catalog</div>
+    <div class="sidebar-title toc-title">目录</div>
     <div class="sidebar-body">
       <ul class="toc-list">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">模块化的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">什么是模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">1.2.</span> <span class="toc-text">模块化的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E6%96%B9%E6%A1%88"><span class="toc-number">1.3.</span> <span class="toc-text">模块化方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83"><span class="toc-number">2.</span> <span class="toc-text">模块化规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CommonJs"><span class="toc-number">2.1.</span> <span class="toc-text">CommonJs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">2.1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">2.1.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="toc-number">2.1.4.</span> <span class="toc-text">加载机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6-%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">ES6 模块化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="toc-number">2.2.3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6-1"><span class="toc-number">2.2.4.</span> <span class="toc-text">加载机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-number">2.3.</span> <span class="toc-text">webpack</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">模块化的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">什么是模块化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">1.2.</span> <span class="toc-text">模块化的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E6%96%B9%E6%A1%88"><span class="toc-number">1.3.</span> <span class="toc-text">模块化方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83"><span class="toc-number">2.</span> <span class="toc-text">模块化规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CommonJs"><span class="toc-number">2.1.</span> <span class="toc-text">CommonJs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">2.1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">2.1.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="toc-number">2.1.4.</span> <span class="toc-text">加载机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6-%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text">ES6 模块化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="toc-number">2.2.3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6-1"><span class="toc-number">2.2.4.</span> <span class="toc-text">加载机制</span></a></li></ol></li></ol></li></ol>
       </ul>
     </div>
   </div>
@@ -351,10 +376,10 @@
     果汁
   </div>
   <div class="framework-info">
-    <span>Framework</span>
+    <span>框架</span>
     <a href="https://hexo.io" target="_blank">Hexo</a>
     <span class="footer-separator">|</span>
-    <span>Theme</span>
+    <span>主题</span>
     <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
   </div>
   
