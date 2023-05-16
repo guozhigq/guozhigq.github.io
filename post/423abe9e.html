@@ -4,19 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
-  <title>puppeteer无头浏览器 | 果汁来一杯</title>
+  <title>git常用命令 | 果汁来一杯</title>
   <link rel="shortcut icon" href="/img/favicon.png">
-  <meta name="description" content="待补充">
+  <meta name="description" content="回滚git回滚主要分为本地回滚、远程回滚在本地开发时，未 git push 之前我们都可以使用 git reset 进行回滚，当然，对于远程commit也是有效的，但不推荐，因为可能会冲掉其他人的 commit 记录，远程一般使用 git revert 进行回滚，下面就两种回滚方式进行具体说明。 git reset在介绍 git reset 之前，我们先了解一下git中的区域划分：  工作区（Wo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="puppeteer无头浏览器">
-<meta property="og:url" content="https://guozhigq.github.io/post/d647f6d9.html">
+<meta property="og:title" content="git常用命令">
+<meta property="og:url" content="https://guozhigq.github.io/post/423abe9e.html">
 <meta property="og:site_name" content="果汁来一杯">
-<meta property="og:description" content="待补充">
+<meta property="og:description" content="回滚git回滚主要分为本地回滚、远程回滚在本地开发时，未 git push 之前我们都可以使用 git reset 进行回滚，当然，对于远程commit也是有效的，但不推荐，因为可能会冲掉其他人的 commit 记录，远程一般使用 git revert 进行回滚，下面就两种回滚方式进行具体说明。 git reset在介绍 git reset 之前，我们先了解一下git中的区域划分：  工作区（Wo">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-16T12:35:39.000Z">
-<meta property="article:modified_time" content="2023-05-16T11:51:31.780Z">
+<meta property="og:image" content="https://guozhigq.github.io/img/git_workspace.png">
+<meta property="article:published_time" content="2021-03-30T12:40:54.000Z">
+<meta property="article:modified_time" content="2023-05-16T14:47:32.486Z">
 <meta property="article:author" content="果汁">
+<meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://guozhigq.github.io/img/git_workspace.png">
   
 <link rel="stylesheet" href="/css/style.css">
 
@@ -114,7 +117,7 @@
     <div class="main-wrap">
       <main class="main-width">
         
-        <h1 class="page-title">puppeteer无头浏览器</h1>
+        <h1 class="page-title">git常用命令</h1>
         
         <article class="article page">
   <div class="article-info">
@@ -125,8 +128,8 @@
       <div class="author-name">果汁</div>
       <div class="article-meta-list">
         
-        <time datetime="2023-04-16 20:35:39" title="2023-04-16 20:35:39" class="time">
-          2023-04-16 20:35:39
+        <time datetime="2021-03-30 20:40:54" title="2021-03-30 20:40:54" class="time">
+          2021-03-30 20:40:54
         </time>
         
         <div class="article-meta-item-wrap">
@@ -136,7 +139,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>3</span>
+            <span>464</span>
           </div>
           
           
@@ -153,10 +156,48 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>待补充</p>
+  <div class="article-content"><h2 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h2><p>git回滚主要分为本地回滚、远程回滚<br>在本地开发时，未 <code>git push</code> 之前我们都可以使用 <code>git reset</code> 进行回滚，当然，对于远程commit也是有效的，但不推荐，因为可能会冲掉其他人的 <code>commit</code> 记录，远程一般使用 <code>git revert</code> 进行回滚，下面就两种回滚方式进行具体说明。</p>
+<h4 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h4><p>在介绍 <code>git reset</code> 之前，我们先了解一下git中的区域划分：</p>
+<ul>
+<li>工作区（WorkSpace）：开发的环境</li>
+<li>暂存区（Stage&#x2F;Index）：使用 <code>git add</code> 相关命令将工作区的代码提交到暂存区</li>
+<li>本地库（Local Repo）：使用 <code>git commit</code> 相关命令将工作区的代码提交到本地库</li>
+<li>远程库（Remote）：使用 <code>git pu sh</code> 相关命令将本地库推送到远程<br>借用网上的一张图片进行说明<br><img src="https://guozhigq.github.io/img/git_workspace.png" alt="git workSpace"></li>
+</ul>
+<p>在使用 <code>git reset</code> 之前，我们需要清楚 <code>git reset</code> 等同于 <code>git reset --mixed</code> ，除此之外还有 <code>git reset --hard</code> 、<code>git reset --soft</code> </p>
+<ul>
+<li><code>git reset --hard</code> 工作区、暂存区、本地仓库回滚到对应commit-id</li>
+<li><code>git reset --mixed</code>  工作区代码不受影响，但是暂存区、本地仓库区的代码回滚到对应的commit-id</li>
+<li><code>git reset --soft</code> 工作区和暂存区的代码不会受到影响，本地仓库区的代码回滚到对应的commit-id</li>
+</ul>
+<p>可以看出来，这三者对于git区域的影响范围依次递减</p>
+<p>注意：<code>git reset</code> 回滚不会对远程分支产生影响，所以在回滚完成进行 <code>git push</code> 的时候，会提示本地分支比较旧，需要先使用 <code>git pull</code> 拉取远程分支，由于我们的目的是回滚，所以当然不需要再拉取远程分支了，此时，直接使用 <code>git push -f</code> 强制推送本地回滚后的代码至远程。</p>
 </div>
   
   <div class="article-end">
+    
+    <div class="article-meta">
+      
+      <div class="article-categories">
+        <div class="article-categories-name">Categories: </div>
+        
+        <a class="article-categories-item" href="/categories/%E6%95%88%E7%8E%87%E5%BC%80%E5%8F%91/">
+          效率开发
+        </a>
+        
+      </div>
+      
+      
+      <div class="article-tags">
+        <div class="article-tags-name">Tags: </div>
+        
+        <a class="article-tags-item" href="/tags/Git/">
+          Git
+        </a>
+        
+      </div>
+      
+    </div>
     
     
 
@@ -173,7 +214,7 @@
   <div class="post-copyright-type">
     <span class="post-copyright-meta">Article Link: </span>
     <span class="post-copyright-info">
-      <a href="https://guozhigq.github.io/post/d647f6d9.html">https://guozhigq.github.io/post/d647f6d9.html</a>
+      <a href="https://guozhigq.github.io/post/423abe9e.html">https://guozhigq.github.io/post/423abe9e.html</a>
     </span>
   </div>
   <div class="post-copyright-notice">
@@ -187,72 +228,20 @@
       </main>
       <aside tabindex="-1">
   
-
-  
-
-  
-  
-
-  
-  
-  
-  <div class="sidebar-block categories-wrap">
-    <div class="sidebar-title categories-title">Categories</div>
+  <div class="sidebar-block sidebar-sticky toc-wrap" tabindex="-1">
+    <div class="toc-btn">
+      <svg class="toc-btn-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+</svg>
+    </div>
+    <div class="sidebar-title toc-title">Catalog</div>
     <div class="sidebar-body">
-      <ul class="categories-list">
-        
-        <li class="categories-item">
-          <a class="categories-link" href="/categories/%E6%95%88%E7%8E%87%E5%BC%80%E5%8F%91/">
-            <div class="categories-name">效率开发</div>
-            <div class="categories-count">4</div>
-          </a>
-        </li>
-        
-        <li class="categories-item">
-          <a class="categories-link" href="/categories/%E6%8B%93%E5%B1%95/">
-            <div class="categories-name">拓展</div>
-            <div class="categories-count">2</div>
-          </a>
-        </li>
-        
+      <ul class="toc-list">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%BB%9A"><span class="toc-number">1.</span> <span class="toc-text">回滚</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git-reset"><span class="toc-number">1.0.1.</span> <span class="toc-text">git reset</span></a></li></ol></li></ol></li></ol>
       </ul>
     </div>
   </div>
-  
-
-  
-  
-  
-  <div class="sidebar-block tags-wrap">
-    <div class="sidebar-title tags-title">Tags</div>
-    <div class="sidebar-body">
-      
-      <a href="/tags/Flutter/" style="color:#cdf96b;font-size:1.8059048034127336rem">Flutter</a>
-      
-      <a href="/tags/Git/" style="color:#9db55c;font-size:0.07077084818421886rem">Git</a>
-      
-      <a href="/tags/JavaScript/" style="color:#ea7b86;font-size:0.6369237182162375rem">JavaScript</a>
-      
-      <a href="/tags/Vue/" style="color:#48b2f7;font-size:1.445787340620019rem">Vue</a>
-      
-      <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color:#84543c;font-size:0.936709950436831rem">工程化</a>
-      
-      <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="color:#2fa1f9;font-size:0.401036123814035rem">小程序</a>
-      
-      <a href="/tags/%E7%BD%91%E7%BB%9C/" style="color:#2b57c;font-size:1.5137760491458603rem">网络</a>
-      
-      <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color:#e86209;font-size:0.5542055213054979rem">浏览器</a>
-      
-    </div>
-  </div>
-  
-
-  
-  
-  
-
-  
-  
   
 </aside>
     </div>

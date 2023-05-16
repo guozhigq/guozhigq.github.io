@@ -253,6 +253,31 @@
     
     
     <entry>
+      <title>git常用命令</title>
+      <link href="/post/423abe9e.html"/>
+      <url>/post/423abe9e.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h2><p>git回滚主要分为本地回滚、远程回滚<br>在本地开发时，未 <code>git push</code> 之前我们都可以使用 <code>git reset</code> 进行回滚，当然，对于远程commit也是有效的，但不推荐，因为可能会冲掉其他人的 <code>commit</code> 记录，远程一般使用 <code>git revert</code> 进行回滚，下面就两种回滚方式进行具体说明。</p><h4 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h4><p>在介绍 <code>git reset</code> 之前，我们先了解一下git中的区域划分：</p><ul><li>工作区（WorkSpace）：开发的环境</li><li>暂存区（Stage&#x2F;Index）：使用 <code>git add</code> 相关命令将工作区的代码提交到暂存区</li><li>本地库（Local Repo）：使用 <code>git commit</code> 相关命令将工作区的代码提交到本地库</li><li>远程库（Remote）：使用 <code>git pu sh</code> 相关命令将本地库推送到远程<br>借用网上的一张图片进行说明<br><img src="https://guozhigq.github.io/img/git_workspace.png" alt="git workSpace"></li></ul><p>在使用 <code>git reset</code> 之前，我们需要清楚 <code>git reset</code> 等同于 <code>git reset --mixed</code> ，除此之外还有 <code>git reset --hard</code> 、<code>git reset --soft</code> </p><ul><li><code>git reset --hard</code> 工作区、暂存区、本地仓库回滚到对应commit-id</li><li><code>git reset --mixed</code>  工作区代码不受影响，但是暂存区、本地仓库区的代码回滚到对应的commit-id</li><li><code>git reset --soft</code> 工作区和暂存区的代码不会受到影响，本地仓库区的代码回滚到对应的commit-id</li></ul><p>可以看出来，这三者对于git区域的影响范围依次递减</p><p>注意：<code>git reset</code> 回滚不会对远程分支产生影响，所以在回滚完成进行 <code>git push</code> 的时候，会提示本地分支比较旧，需要先使用 <code>git pull</code> 拉取远程分支，由于我们的目的是回滚，所以当然不需要再拉取远程分支了，此时，直接使用 <code>git push -f</code> 强制推送本地回滚后的代码至远程。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 效率开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>git代码规范</title>
       <link href="/post/e75acacf.html"/>
       <url>/post/e75acacf.html</url>
