@@ -13,11 +13,13 @@
 <meta property="og:site_name" content="果汁来一杯">
 <meta property="og:description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 概括说明：当我们发起请求时，会先从浏览器缓存中查找是否有缓存数据，  如果存在，直接返回数据。 如果不存在或者数据已失效&#x2F;过期，则从服务端获取。即先进行强缓存判断，再与服务端进行协商  强缓存依赖字段： Expires、Cache-ControlCache-Control 优先于 Expires Expires来源：上一次响应过程中">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://guozhigq.github.io/img/brower_cache.png">
 <meta property="article:published_time" content="2022-05-15T07:24:57.000Z">
-<meta property="article:modified_time" content="2023-05-15T14:24:16.140Z">
+<meta property="article:modified_time" content="2023-05-16T11:51:23.615Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://guozhigq.github.io/img/brower_cache.png">
   
 <link rel="stylesheet" href="/css/style.css">
 
@@ -137,7 +139,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>1k</span>
+            <span>1.2k</span>
           </div>
           
           
@@ -146,7 +148,7 @@
   <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
   <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
 </svg>
-            <span>3min</span>
+            <span>4min</span>
           </div>
           
         </div>
@@ -183,9 +185,16 @@
 </blockquote>
 <p>ETag是资源的唯一标识，可以是资源的哈希值、版本号等，随着资源内容生成。</p>
 <p>服务端在响应头中返回 <code>ETag</code> 字段表示资源的唯一性，通常是一个唯一的字符串。当客户端发送请求时，在请求头中携带 <code>If-None-Match</code> 字段（值为上次获取资源时服务端返回 <code>ETag</code>）。服务端接收到请求后，会将 <code>If-None-Match</code> 与服务端资源最新资源的标识进行比较。如果标识符相同，响应 <code>304 Not Modified</code>，告知客户端可以使用本地缓存。否则，响应<code>200 OK</code>，返回最新的资源以及<code>ETag</code>。</p>
+<p><img src="https://guozhigq.github.io/img/brower_cache.png" alt="brower cache"></p>
 <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
 <li>强缓存不会发起请求；协商缓存至少发起一次请求</li>
 <li>🎯命中强缓存，Http状态码为<code>灰色的200</code>；🎯命中协商缓存，Http状态码为<code>304</code></li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>很明显，浏览器之所以设置缓存肯定是有一些作用的，那么都有哪些使用场景呢？</p>
+<ul>
+<li>减少页面加载时间<br>当我们每次进入页面时，都需要从服务端获取css或js文件，然后进行加载、渲染等等会耗费一定的时间，如果能够把公共部分或者没有更新的部分缓存到本地，就可以省去请求耗时</li>
+<li>资源预加载：在进入某页面时，对于体积较大的网络资源提前加载&amp;缓存</li>
+<li>待补充…</li>
 </ul>
 </div>
   
@@ -244,7 +253,7 @@
     <div class="sidebar-title toc-title">Catalog</div>
     <div class="sidebar-body">
       <ul class="toc-list">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">强缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Expires"><span class="toc-number">1.0.1.</span> <span class="toc-text">Expires</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache-Control"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cache-Control</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Last-Modified-%E5%92%8C-If-Modified-Since"><span class="toc-number">2.0.1.</span> <span class="toc-text">Last-Modified 和 If-Modified-Since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ETag-%E5%92%8C-If-None-Match"><span class="toc-number">2.0.2.</span> <span class="toc-text">ETag 和 If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">区别</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">强缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Expires"><span class="toc-number">1.0.1.</span> <span class="toc-text">Expires</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache-Control"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cache-Control</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Last-Modified-%E5%92%8C-If-Modified-Since"><span class="toc-number">2.0.1.</span> <span class="toc-text">Last-Modified 和 If-Modified-Since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ETag-%E5%92%8C-If-None-Match"><span class="toc-number">2.0.2.</span> <span class="toc-text">ETag 和 If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">使用场景</span></a></li></ol>
       </ul>
     </div>
   </div>
