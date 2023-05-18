@@ -6,15 +6,15 @@
   
   <title>360°看车实现方案 | 果汁来一杯</title>
   <link rel="shortcut icon" href="/img/favicon.png">
-  <meta name="description" content="最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360°的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几方">
+  <meta name="description" content="最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每10°切换一张，达到360°的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几">
 <meta property="og:type" content="article">
 <meta property="og:title" content="360°看车实现方案">
 <meta property="og:url" content="https://guozhigq.github.io/post/7a597f7.html">
 <meta property="og:site_name" content="果汁来一杯">
-<meta property="og:description" content="最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360°的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几方">
+<meta property="og:description" content="最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每10°切换一张，达到360°的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-18T12:07:54.000Z">
-<meta property="article:modified_time" content="2023-05-18T03:30:36.505Z">
+<meta property="article:modified_time" content="2023-05-18T03:39:51.477Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -56,7 +56,7 @@
       <nav>
         
         <div class="search" tabindex="-1">
-          <input class="search-input" placeholder="搜索文章" type="search" maxlength="64">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
           <div class="seach-icon-container">
             <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
@@ -64,8 +64,8 @@
           </div>
           <div class="search-history">
             <div class="search-history-title">
-              <span>搜索历史</span>
-              <span class="search-history-clear">清空</span>
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
             </div>
             <div class="search-history-list"></div>
           </div>
@@ -155,7 +155,7 @@
     </div>
   </div>
   <div class="article-content"><p>最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。</p>
-<p>经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360°的效果，<code>36 = 360 /10</code>，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。</p>
+<p>经过调研，发现市面上类似场景的实现都是36张图，每10°切换一张，达到360°的效果，<code>36 = 360 /10</code>，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。</p>
 <p>下面将从几方面实现</p>
 <ul>
 <li>如何展示</li>
@@ -220,11 +220,7 @@
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">onMouseMove</span>: <span class="title function_">throttle</span>(<span class="keyword">function</span>(<span class="params">type, e</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(clicked)&#123;</span><br><span class="line">        <span class="keyword">let</span> pageX = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (type === <span class="string">&quot;touch&quot;</span>) &#123;</span><br><span class="line">            pageX = e.<span class="property">changedTouches</span>[<span class="number">0</span>].<span class="property">pageX</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            pageX = e.<span class="property">pageX</span></span><br><span class="line">        &#125;</span><br><span class="line">        widthStep = <span class="number">4</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="title class_">Math</span>.<span class="title function_">abs</span>(currPos - pageX) &gt;= widthStep) &#123;</span><br><span class="line">            <span class="keyword">if</span> (currPos - pageX &gt;= widthStep) &#123;</span><br><span class="line">                currImg++;</span><br><span class="line">                <span class="keyword">if</span> (currImg &gt; imageTotal) &#123;</span><br><span class="line">                    currImg = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                currImg--;</span><br><span class="line">                <span class="keyword">if</span> (currImg &lt; <span class="number">1</span>) &#123;</span><br><span class="line">                    currImg = imageTotal;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            currPos = pageX;</span><br><span class="line">            vrImgs[lastImg].<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;notseen&#x27;</span>);</span><br><span class="line">            vrImgs[currImg].<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;notseen&#x27;</span>);</span><br><span class="line">            lastImg = currImg;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,<span class="number">0</span>),</span><br></pre></td></tr></table></figure>
 <p>到此为止，360°看车就基本完成了。</p>
-<hr>
-
-<p>但是，等等。36张图，如果用户在图片还没有全部加载完的情况下拖动，岂不是不尴尬😅，空白一片，神马都没有。</p>
-<p>那就监听图片加载，加个loading或者进度条吧，进度条比较好。</p>
-<p>在这里我们利用image的onLoad来实现</p>
+<h3 id="如何优化"><a href="#如何优化" class="headerlink" title="如何优化"></a>如何优化</h3><p>但是，等等。36张图，如果用户在图片还没有全部加载完的情况下拖动，岂不是不尴尬😅，空白一片，神马都没有。<br>那就监听图片加载，加个loading或者进度条吧，进度条更直观。在这里我们利用image的onLoad来实现</p>
 <blockquote>
 <p>onload 事件在图片加载完成后立即执行。</p>
 </blockquote>
@@ -256,7 +252,7 @@
       
       
       <div class="article-tags">
-        <div class="article-tags-name">标签: </div>
+        <div class="article-tags-name">Tags: </div>
         
         <a class="article-tags-item" href="/tags/Vue/">
           Vue
@@ -273,19 +269,19 @@
   <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm117.134 346.753c-1.592 1.867-39.776 45.731-109.851 45.731-84.692 0-144.484-63.26-144.484-145.567 0-81.303 62.004-143.401 143.762-143.401 66.957 0 101.965 37.315 103.422 38.904a12 12 0 0 1 1.238 14.623l-22.38 34.655c-4.049 6.267-12.774 7.351-18.234 2.295-.233-.214-26.529-23.88-61.88-23.88-46.116 0-73.916 33.575-73.916 76.082 0 39.602 25.514 79.692 74.277 79.692 38.697 0 65.28-28.338 65.544-28.625 5.132-5.565 14.059-5.033 18.508 1.053l24.547 33.572a12.001 12.001 0 0 1-.553 14.866z" />
 </svg></div>
   <div class="post-copyright-author">
-    <span class="post-copyright-meta">作者: </span>
+    <span class="post-copyright-meta">Authorship: </span>
     <span class="post-copyright-info">
       <a href="https://guozhigq.github.io">果汁</a>
     </span>
   </div>
   <div class="post-copyright-type">
-    <span class="post-copyright-meta">文章链接: </span>
+    <span class="post-copyright-meta">Article Link: </span>
     <span class="post-copyright-info">
       <a href="https://guozhigq.github.io/post/7a597f7.html">https://guozhigq.github.io/post/7a597f7.html</a>
     </span>
   </div>
   <div class="post-copyright-notice">
-    <span class="post-copyright-meta">版权声明: </span>
+    <span class="post-copyright-meta">Copyright: </span>
     <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="https://guozhigq.github.io" target="_blank">果汁来一杯</a> !</span>
   </div>
 </div>
@@ -302,10 +298,10 @@
   <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
 </svg>
     </div>
-    <div class="sidebar-title toc-title">目录</div>
+    <div class="sidebar-title toc-title">Catalog</div>
     <div class="sidebar-body">
       <ul class="toc-list">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%B1%95%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">如何展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">如何操作</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%B1%95%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">如何展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">如何操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">如何优化</span></a></li></ol>
       </ul>
     </div>
   </div>
@@ -321,10 +317,10 @@
     果汁
   </div>
   <div class="framework-info">
-    <span>框架</span>
+    <span>Framework</span>
     <a href="https://hexo.io" target="_blank">Hexo</a>
     <span class="footer-separator">|</span>
-    <span>主题</span>
+    <span>Theme</span>
     <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
   </div>
   
