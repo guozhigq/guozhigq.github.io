@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
   
-  <title>360度看车如何实现的 | 果汁来一杯</title>
+  <title>360°看车实现方案 | 果汁来一杯</title>
   <link rel="shortcut icon" href="/img/favicon.png">
-  <meta name="description" content="最近在业务需求中，有360度看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360度的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几方">
+  <meta name="description" content="最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360°的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几方">
 <meta property="og:type" content="article">
-<meta property="og:title" content="360度看车如何实现的">
+<meta property="og:title" content="360°看车实现方案">
 <meta property="og:url" content="https://guozhigq.github.io/post/7a597f7.html">
 <meta property="og:site_name" content="果汁来一杯">
-<meta property="og:description" content="最近在业务需求中，有360度看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360度的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几方">
+<meta property="og:description" content="最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360°的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几方">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-18T12:07:54.000Z">
-<meta property="article:modified_time" content="2023-05-18T03:23:13.568Z">
+<meta property="article:modified_time" content="2023-05-18T03:30:36.505Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -115,7 +115,7 @@
     <div class="main-wrap">
       <main class="main-width">
         
-        <h1 class="page-title">360度看车如何实现的</h1>
+        <h1 class="page-title">360°看车实现方案</h1>
         
         <article class="article page">
   <div class="article-info">
@@ -154,15 +154,15 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>最近在业务需求中，有360度看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。</p>
-<p>经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360度的效果，<code>36 = 360 /10</code>，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。</p>
+  <div class="article-content"><p>最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。</p>
+<p>经过调研，发现市面上类似场景的实现都是36张图，每十度切换一张，达到360°的效果，<code>36 = 360 /10</code>，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。</p>
 <p>下面将从几方面实现</p>
 <ul>
 <li>如何展示</li>
 <li>如何实现</li>
 <li>如何优化</li>
 </ul>
-<h3 id="如何展示"><a href="#如何展示" class="headerlink" title="如何展示"></a>如何展示</h3><p>要达到360度看车的效果，需要将36张图片叠加在一起，布局就使用如下，父盒子 <code>position: relative</code>，子元素 <img> 共36张，使用 <code>position: absolute</code> 层叠，滑动的时候通过切换图片的 <strong>显示&#x2F;隐藏</strong> 完成效果。当然相关的事件是加载父盒子上的。</p>
+<h3 id="如何展示"><a href="#如何展示" class="headerlink" title="如何展示"></a>如何展示</h3><p>要达到360°看车的效果，需要将36张图片叠加在一起，布局就使用如下，父盒子 <code>position: relative</code>，子元素 <img> 共36张，使用 <code>position: absolute</code> 层叠，滑动的时候通过切换图片的 <strong>显示&#x2F;隐藏</strong> 完成效果。当然相关的事件是加载父盒子上的。</p>
 <p>这里对于图片的隐藏使用 <code>visibility: hidden</code>，至于为什么不使用 <code>display:none</code> ? 因为  <code>display:none</code>的元素显示&#x2F;隐藏时 会触发 回流、重绘，而 <code>visibility: hidden</code> 只会触发重绘，性能方面后者屡胜一筹。</p>
 <p>另外，记得给 <code>img</code> 加上<code>draggable="false"</code> 属性，否则图片被拖动，就不美观了。当然在这里理论上是不会发生被拖动的情况的。</p>
 <figure class="highlight html">
@@ -219,7 +219,7 @@
         <span class="copy-code">COPY</span>
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">onMouseMove</span>: <span class="title function_">throttle</span>(<span class="keyword">function</span>(<span class="params">type, e</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(clicked)&#123;</span><br><span class="line">        <span class="keyword">let</span> pageX = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (type === <span class="string">&quot;touch&quot;</span>) &#123;</span><br><span class="line">            pageX = e.<span class="property">changedTouches</span>[<span class="number">0</span>].<span class="property">pageX</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            pageX = e.<span class="property">pageX</span></span><br><span class="line">        &#125;</span><br><span class="line">        widthStep = <span class="number">4</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="title class_">Math</span>.<span class="title function_">abs</span>(currPos - pageX) &gt;= widthStep) &#123;</span><br><span class="line">            <span class="keyword">if</span> (currPos - pageX &gt;= widthStep) &#123;</span><br><span class="line">                currImg++;</span><br><span class="line">                <span class="keyword">if</span> (currImg &gt; imageTotal) &#123;</span><br><span class="line">                    currImg = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                currImg--;</span><br><span class="line">                <span class="keyword">if</span> (currImg &lt; <span class="number">1</span>) &#123;</span><br><span class="line">                    currImg = imageTotal;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            currPos = pageX;</span><br><span class="line">            vrImgs[lastImg].<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;notseen&#x27;</span>);</span><br><span class="line">            vrImgs[currImg].<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;notseen&#x27;</span>);</span><br><span class="line">            lastImg = currImg;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,<span class="number">0</span>),</span><br></pre></td></tr></table></figure>
-<p>到此为止，360度看车就基本完成了。</p>
+<p>到此为止，360°看车就基本完成了。</p>
 <hr>
 
 <p>但是，等等。36张图，如果用户在图片还没有全部加载完的情况下拖动，岂不是不尴尬😅，空白一片，神马都没有。</p>
