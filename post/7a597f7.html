@@ -14,7 +14,7 @@
 <meta property="og:description" content="最近在业务需求中，有360°看车的需求，即左右左右滑动鼠标实现正、侧、后方，多视角看车，增加意向用户对于车辆外观的了解，提高购买意向（毕竟比三张轮播图更生动不是）。 经过调研，发现市面上类似场景的实现都是36张图，每10°切换一张，达到360°的效果，36 &#x3D; 360 &#x2F;10，同时也发现，目前市面上开源框架不适用于业务需求，主要还是可定制度太低，所以决定自己实现（好像也没其他办法了）。 下面将从几">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-18T12:07:54.000Z">
-<meta property="article:modified_time" content="2023-05-18T03:39:51.477Z">
+<meta property="article:modified_time" content="2023-05-18T06:09:35.081Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -171,7 +171,7 @@
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>   </span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">draggable</span>=<span class="string">&quot;false&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">    ... 一共36张</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="如何操作"><a href="#如何操作" class="headerlink" title="如何操作"></a>如何操作</h3><p>因为<a target="_blank" rel="noopener" href="https://www.niutr.com/">品牌官网</a>是自适应的，需要对PC、PAD、mob都做适配，所以这里使用<mouse>、<touch>来实现具体的操作（滑动）逻辑。</p>
+<h3 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h3><p>因为<a target="_blank" rel="noopener" href="https://www.niutr.com/">品牌官网</a>是自适应的，需要对PC、PAD、mob都做适配，所以这里使用<code>mouse</code>、<code>touch</code> 来实现具体的操作（滑动）逻辑。</p>
 <p>鼠标相关事件</p>
 <ul>
 <li>mouseup</li>
@@ -185,28 +185,28 @@
 <li>touchmove</li>
 <li>touchend</li>
 </ul>
-<p>简单说一下思路：</p>
-<p>开始移动：在鼠标按下或者开始触摸时</p>
+<p><strong>简单说一下思路：</strong></p>
+<ol>
+<li><p>开始移动：在鼠标按下或者开始触摸时</p>
 <ul>
 <li>记录初始的 <code>pageX</code>，</li>
 <li>记录当前的图片索引 <code>index</code></li>
 <li>标记开始 <code>clicked = true</code></li>
 </ul>
-<p>移动中：在鼠标或者触摸开始移动时</p>
+</li>
+<li><p>移动中：在鼠标或者触摸开始移动时</p>
 <ul>
-<li>计算当前 <code>pageX</code> 与上一次或者初始的<code>pageX</code> 的差值<ul>
+<li>计算当前 <code>pageX</code> 与上一次或者初始的<code>pageX</code> 的差值</li>
 <li>差值大于0，图片索引 <code>index</code> 自增1</li>
 <li>差值小于0，图片索引 <code>index</code> 自减1</li>
-</ul>
-</li>
 <li>自增&#x2F;自减后，对于当前图片移除 <code>visibility: hidden</code> 属性，上一张&#x2F;下一张图片增加 <code>visibility: hidden</code> 属性</li>
 <li><code>index</code> 大于图片总数时，重置为0，<code>index</code> 小于1时，重置为图片总数，以此来完成循环的效果</li>
 </ul>
-<p>移动完成：在鼠标抬起或者停止触摸时</p>
-<ul>
-<li>标记开始 <code>clicked = false</code></li>
-</ul>
-<p>具体代码实现如下：</p>
+</li>
+<li><p>移动完成：在鼠标抬起或者停止触摸时, 标记 <code>clicked = false</code></p>
+</li>
+</ol>
+<p><strong>具体代码实现如下：</strong></p>
 <figure class="highlight js">
       <div class="code-block-header" lang="js">
         <span class="copy-code">COPY</span>
@@ -301,7 +301,7 @@
     <div class="sidebar-title toc-title">Catalog</div>
     <div class="sidebar-body">
       <ul class="toc-list">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%B1%95%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">如何展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">如何操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">如何优化</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%B1%95%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">如何展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">如何实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">如何优化</span></a></li></ol>
       </ul>
     </div>
   </div>
