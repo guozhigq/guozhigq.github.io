@@ -14,7 +14,7 @@
 <meta property="og:description" content="由于HTTP本身是无状态的，服务端无法区分谁是谁，所以有了cookie的概念。cookie的作用之一也就是区分用户，存储用户信息。 cookie来去cookie由服务端在响应头中通过set-cookie下发，浏览器接收到后，会自动将cookie中的字段保存起来，下次再发起请求时会自动在请求头中携带cookie cookie的属性 Domain：cookie的作用域，默认 &#x2F;从A域名得到的cooki">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-25T03:29:47.000Z">
-<meta property="article:modified_time" content="2023-05-15T09:38:02.245Z">
+<meta property="article:modified_time" content="2023-05-18T08:03:27.515Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>282</span>
+            <span>325</span>
           </div>
           
           
@@ -165,6 +165,16 @@
 <li>Strict：严格模式，完全禁止第三方cookie，跨站点时，任何情况下都不会发送 Cookie。</li>
 <li>Lax：默认值。除了<code><a href="..."></a></code>、<code><link rel="prerender" href="..."/></code>、<code><form method="GET" action="..."></code> 均不发送第三方cookie。</li>
 <li>None：跨站都发送。</li>
+</ul>
+</li>
+</ul>
+<p><strong>跨域携带cookie需求满足以下条件</strong></p>
+<ul>
+<li>客户端请求头携带 <code>withCredentials = true<code></li>
+<li>服务端设置<ul>
+<li>Access-Control-Allow-Origin: <strong>特定域名</strong></li>
+<li>Access-Control-Allow-Credentials: true</li>
+<li>samesite: none</li>
 </ul>
 </li>
 </ul>

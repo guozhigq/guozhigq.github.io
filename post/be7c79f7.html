@@ -6,16 +6,16 @@
   
   <title>浏览器缓存 | 果汁来一杯</title>
   <link rel="shortcut icon" href="/img/favicon.png">
-  <meta name="description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 概括说明：当我们发起请求时，会先从浏览器缓存中查找是否有缓存数据，  如果存在，直接返回数据。 如果不存在或者数据已失效&#x2F;过期，则从服务端获取。即先进行强缓存判断，再与服务端进行协商  强缓存依赖字段： Expires、Cache-ControlCache-Control 优先于 Expires Expires来源：上一次响应过程中">
+  <meta name="description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 当我们首次向服务端发起请求时，由于本地没有缓存结果及标识，所以直接向服务端发起请求，服务器会在响应报文的HTTP头中增加缓存标识，客户端即浏览器会根据缓存标识来决定是否缓存结果，需要缓存则将请求结果和缓存标识存入浏览器缓存。 在每次在发起请求时，都会在浏览器缓存中先检查是否有请求结果以及缓存标识根据有无请求结果及缓存标识，做以下判断：  无缓">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器缓存">
 <meta property="og:url" content="https://guozhigq.github.io/post/be7c79f7.html">
 <meta property="og:site_name" content="果汁来一杯">
-<meta property="og:description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 概括说明：当我们发起请求时，会先从浏览器缓存中查找是否有缓存数据，  如果存在，直接返回数据。 如果不存在或者数据已失效&#x2F;过期，则从服务端获取。即先进行强缓存判断，再与服务端进行协商  强缓存依赖字段： Expires、Cache-ControlCache-Control 优先于 Expires Expires来源：上一次响应过程中">
+<meta property="og:description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 当我们首次向服务端发起请求时，由于本地没有缓存结果及标识，所以直接向服务端发起请求，服务器会在响应报文的HTTP头中增加缓存标识，客户端即浏览器会根据缓存标识来决定是否缓存结果，需要缓存则将请求结果和缓存标识存入浏览器缓存。 在每次在发起请求时，都会在浏览器缓存中先检查是否有请求结果以及缓存标识根据有无请求结果及缓存标识，做以下判断：  无缓">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://guozhigq.github.io/img/brower_cache.png">
 <meta property="article:published_time" content="2022-05-15T07:24:57.000Z">
-<meta property="article:modified_time" content="2023-05-16T11:51:47.731Z">
+<meta property="article:modified_time" content="2023-05-18T06:21:32.450Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="浏览器">
 <meta name="twitter:card" content="summary">
@@ -139,7 +139,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>1.2k</span>
+            <span>1.4k</span>
           </div>
           
           
@@ -157,10 +157,15 @@
     </div>
   </div>
   <div class="article-content"><p>浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。</p>
-<p>概括说明：当我们发起请求时，会先从浏览器缓存中查找是否有缓存数据，</p>
+<p>当我们首次向服务端发起请求时，由于本地没有缓存结果及标识，所以直接向服务端发起请求，服务器会在响应报文的HTTP头中增加缓存标识，客户端即浏览器会根据缓存标识来决定是否缓存结果，需要缓存则将请求结果和缓存标识存入浏览器缓存。</p>
+<p>在每次在发起请求时，都会在浏览器缓存中先检查是否有请求结果以及缓存标识<br>根据有无请求结果及缓存标识，做以下判断：</p>
 <ol>
-<li>如果存在，直接返回数据。</li>
-<li>如果不存在或者数据已失效&#x2F;过期，则从服务端获取。<br>即先进行<code>强缓存</code>判断，再与服务端进行<code>协商</code></li>
+<li>无缓存结果和缓存标识，走强制缓存失败，直接向服务器发起请求</li>
+<li>有缓存结果和缓存标识<ol>
+<li>缓存标识在有限期内，强制缓存生效，直接返回缓存结果，此时网络请求显示灰色的200</li>
+<li>缓存标识已失效，则走协商缓存</li>
+</ol>
+</li>
 </ol>
 <h2 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h2><p>依赖字段： Expires、Cache-Control<br><code>Cache-Control</code> 优先于 <code>Expires</code></p>
 <h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>来源：上一次响应过程中，服务器在响应头中返回的字段，过期时间，即资源的有效期，是绝对时间。<br>使用：浏览器在下次发起同一请求时，会通过Expries来判断该请求在本地的缓存是否过期，如果有效则直接读取，否则进行后续逻辑<br>弊端：客户端与服务端时间不一致，倒是命中不准确</p>
