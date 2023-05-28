@@ -14,7 +14,7 @@
 <meta property="og:description" content="页面性能包含了服务器请求和响应、加载、执行脚本、渲染、布局和绘制每个像素到屏幕上。这里我们只讨论[渲染、布局和绘制]这个过程。 假设我们通过请求得到了页面加载所需的资源js、css、图片等等，页面开始渲染，主要有以下几步：  浏览器解析 HTML，将接收到的数据 转化为 DOM 树，解析过程中如果发现引用了外部资源则暂停解析，加载外部资源，加载完成后解析剩余HTML 解析Css，构造 CSS 模型">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-10-17T12:49:13.000Z">
-<meta property="article:modified_time" content="2023-05-19T09:41:25.339Z">
+<meta property="article:modified_time" content="2023-05-28T15:23:51.195Z">
 <meta property="article:author" content="果汁">
 <meta name="twitter:card" content="summary">
   
@@ -136,7 +136,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>1.1k</span>
+            <span>1.2k</span>
           </div>
           
           
@@ -213,6 +213,26 @@
         <span class="copy-code">COPY</span>
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> width = box.<span class="property">offsetWidth</span>;</span><br><span class="line">box.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;big&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于需要提前加载的资源，可以使用 <code>preload</code><figure class="highlight html">
+      <div class="code-block-header" lang="html">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;preload&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/css/mystyles.css&quot;</span> <span class="attr">as</span>=<span class="string">&quot;style&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>对于需要解析的非本站域名&#x2F;跨域域名，可以使用 <code>dns-prefetch</code><ul>
+<li>需要注意的是：<ul>
+<li><code>dns-prefetch</code> 仅对跨域域上的 DNS 查找有效，因此请避免使用它来指向您的站点或域（避免多此一举）</li>
+<li><figure class="highlight html">
+      <div class="code-block-header" lang="html">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://fonts.googleapis.com/&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>preconnect</li>
+</ul>
 </div>
   
   <div class="article-end">
