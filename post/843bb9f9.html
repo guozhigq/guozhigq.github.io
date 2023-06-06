@@ -14,7 +14,7 @@
 <meta property="og:description" content="HTTP 又称超文本传输协议，自从1991年发布初始版本0.9，现如今已经到了HTTP 3.0。在这里做个笔记，来记录一下HTTP的前世今生 HTTP 0.9&#x2F;1.0HTTP 0.9不支持请求头，只支持GET方法。HTTP 1.0 在0.9的基础了，增加了一些变化：  请求中加入的版本号，例如 HTTP&#x2F;1.0  增加了请求头&amp;响应头  增加了HTTP Status Code 当">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-12T13:45:26.000Z">
-<meta property="article:modified_time" content="2023-05-21T05:59:19.387Z">
+<meta property="article:modified_time" content="2023-06-06T09:44:30.674Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>1.4k</span>
+            <span>1.6k</span>
           </div>
           
           
@@ -186,7 +186,15 @@
 <p>在HTTP 1.1版本中存在的问题</p>
 <ul>
 <li>请求并行数量限制，一般限制6个。（精灵图的优化来源于此，减少请求数，提高页面加载速度）</li>
-<li>主要以文本格式传输数据，传输成本较大。</li>
+<li>头部冗余，每次携带都需要携带重复的头部信息。</li>
+<li>队头阻塞：由于管道机制，同一个TCP连接中的多个请求为<strong>串行</strong>，必须等到上一个请求返回响应时才可以进行下一个。如果上一个请求因为某种原因被阻塞时，在后面排队的所有请求也一并被阻塞，导致带宽无法被充分利用</li>
+<li>明文传输，主要以文本格式传输数据，传输成本较大。</li>
+</ul>
+<p>队头阻塞的解决方案：</p>
+<ul>
+<li>域名分片：将同一个页面的资源分散到不同域名，提升并发连接上限，因为浏览器通常对同一域名的 HTTP 连接最大只能是 6 个</li>
+<li>雪碧图：将多个小图合并，减少请求数</li>
+<li>小图使用base64内联实现</li>
 </ul>
 </li>
 </ul>
@@ -197,11 +205,12 @@
 <li>多路复用：一个TCP连接中存在多个流，同时发送多个请求，对端可以通过帧中的表示知道该帧属于哪个请求。在客户端，这些帧乱序发送，到对端后再根据每个帧首部的流标识符重新组装</li>
 <li>头部压缩：在网络请求中，请求头的内容一般大且重复，数据冗余很严重，HTTP2.0中通过HPAK算法，消除重复部分（客户端与服务端维护同一份字典，把头部跟数据分离，封装成头帧和数据帧，每次请求只发送索引号，以此来达到减少冗余，降低开销的目的）。</li>
 <li>服务端推送：服务端主动推送数据至客户端</li>
+<li></li>
 </ul>
 <p>在HTTP 2.0中存在的问题</p>
 <ul>
 <li>队头阻塞问题，一旦丢包就会触发重传机制（TCP问题），其他请求需要等待重传完成之后才能继续请求</li>
-<li>建立链接时需要先进行TCP三次握手、在TLS三次握手</li>
+<li>建立链接时需要先进行TCP三次握手、再TLS三次握手（https）</li>
 </ul>
 <h3 id="HTTP-3-0"><a href="#HTTP-3-0" class="headerlink" title="HTTP 3.0"></a>HTTP 3.0</h3><p>HTTP3.0使用了基于UDP的QUIC协议</p>
 <ul>
