@@ -14,7 +14,7 @@
 <meta property="og:description" content="在对象和数组进行循环遍历时，我们通常会使用for-in、for-of，众所周知，for-of是无法遍历对象的 123456let obj &#x3D; &amp;#123;a:1, b:2, c:3&amp;#125;;for(let i of obj)&amp;#123;    console.log(i)&amp;#125;&#x2F;&#x2F; Uncaught TypeError: obj is not iterable 因为对象内部是没有迭代器对">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-21T07:18:37.000Z">
-<meta property="article:modified_time" content="2023-06-21T08:04:58.282Z">
+<meta property="article:modified_time" content="2023-06-21T08:18:25.541Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="javaScript">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>273</span>
+            <span>356</span>
           </div>
           
           
@@ -169,7 +169,14 @@
       <div class="code-block-header" lang="js">
         <span class="copy-code">COPY</span>
       </div>
-      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>[<span class="title class_">Symbol</span>.<span class="property">iterator</span>] = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// 重要</span></span><br><span class="line">    <span class="keyword">let</span> self = <span class="variable language_">this</span></span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="comment">// 每次遍历时，调用next()，并返回一个对象</span></span><br><span class="line">        <span class="attr">next</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> done = i &gt;= keys.<span class="property">length</span>;</span><br><span class="line">            <span class="keyword">var</span> value = !done ? self[keys[i++]] : <span class="literal">undefined</span>;</span><br><span class="line">            <span class="comment">// 该对象内包含两个值</span></span><br><span class="line">            <span class="comment">// done 表示是否遍历是否完成</span></span><br><span class="line">            <span class="comment">// value 表示当前值</span></span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="attr">done</span>: done,</span><br><span class="line">                <span class="attr">value</span>: value</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>,<span class="attr">c</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> obj2)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1 2 3</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>[<span class="title class_">Symbol</span>.<span class="property">iterator</span>] = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// 重要</span></span><br><span class="line">    <span class="keyword">let</span> self = <span class="variable language_">this</span></span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="comment">// 每次遍历时，调用next()，并返回一个对象</span></span><br><span class="line">        <span class="attr">next</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> done = i &gt;= keys.<span class="property">length</span>;</span><br><span class="line">            <span class="keyword">let</span> value = !done ? self[keys[i++]] : <span class="literal">undefined</span>;</span><br><span class="line">            <span class="comment">// 该对象内包含两个值</span></span><br><span class="line">            <span class="comment">// done 表示是否遍历是否完成</span></span><br><span class="line">            <span class="comment">// value 表示当前值</span></span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="attr">done</span>: done,</span><br><span class="line">                <span class="attr">value</span>: value</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>,<span class="attr">c</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> obj2)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1 2 3</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以看出每次迭代，其实就是在调用迭代器的 <code>next()</code> 方法。其中 <code>done</code> 表示遍历是否完成，那么我们就可以通过改变done的状态来结束遍历。<br>比如：</p>
+<figure class="highlight js">
+      <div class="code-block-header" lang="js">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">... ...</span><br><span class="line">    <span class="attr">next</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 手动控制 只遍历两次</span></span><br><span class="line">        <span class="keyword">let</span> done = i &gt;= <span class="number">2</span>;</span><br><span class="line">        <span class="comment">// 直接结束遍历</span></span><br><span class="line">        <span class="keyword">let</span> done = <span class="literal">true</span>;</span><br><span class="line">        ... ...</span><br><span class="line">    &#125;</span><br><span class="line">... ...</span><br></pre></td></tr></table></figure>
 
 </div>
   
@@ -258,21 +265,21 @@
     <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/git/" style="color:#f90c5d;font-size:0.12105526932892552rem">git</a>
+      <a href="/tags/git/" style="color:#69153a;font-size:1.809219772842686rem">git</a>
       
-      <a href="/tags/flutter/" style="color:#89aeca;font-size:0.24785461408293497rem">flutter</a>
+      <a href="/tags/flutter/" style="color:#71da39;font-size:0.8059139115752929rem">flutter</a>
       
-      <a href="/tags/javaScript/" style="color:#2ef861;font-size:0.7105227519773822rem">javaScript</a>
+      <a href="/tags/javaScript/" style="color:#7dbdde;font-size:0.024902606055523968rem">javaScript</a>
       
-      <a href="/tags/%E7%BD%91%E7%BB%9C/" style="color:#479fa2;font-size:0.367432402817065rem">网络</a>
+      <a href="/tags/%E7%BD%91%E7%BB%9C/" style="color:#d2c36;font-size:0.3477449739543146rem">网络</a>
       
-      <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color:#82a453;font-size:0.011508148938817353rem">工程化</a>
+      <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color:#31b441;font-size:1.7647409409606074rem">工程化</a>
       
-      <a href="/tags/vue/" style="color:#115e9;font-size:1.6989116306399388rem">vue</a>
+      <a href="/tags/vue/" style="color:#ae32d0;font-size:1.9924780585295938rem">vue</a>
       
-      <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="color:#9d8405;font-size:1.2627908935061591rem">小程序</a>
+      <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="color:#30d1ca;font-size:0.3107380644593656rem">小程序</a>
       
-      <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color:#858284;font-size:0.8677466616059646rem">浏览器</a>
+      <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color:#6e8132;font-size:0.3816012084684446rem">浏览器</a>
       
     </div>
   </div>
