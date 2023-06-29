@@ -4,7 +4,32 @@
   
     
     <entry>
-      <title>css新特性：@container容器查询</title>
+      <title>CSS一键还原</title>
+      <link href="/post/fb87caf8.html"/>
+      <url>/post/fb87caf8.html</url>
+      
+        <content type="html"><![CDATA[<p>标题多少UC震惊题的味道了 咳咳。。。</p><p>在日常开发中，我们经常需要对元素做一些<strong>显示&#x2F;隐藏</strong>切换，例如常用的<code>display</code></p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">display</span>: block;</span><br><span class="line">diaplay: none;</span><br></pre></td></tr></table></figure><p>比如有一个需求，要求对列表最多展示3项，点击按钮后全部展示。</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 隐藏 */</span></span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(n+<span class="number">4</span>) &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 展示 */</span></span><br><span class="line"><span class="selector-tag">li</span><span class="selector-class">.style</span><span class="selector-class">.display</span> = &#x27;block&#x27;;</span><br></pre></td></tr></table></figure><p>初步看来，没什么毛病，但是。<br><img src="https://guozhigq.github.io/img/css/css-revert.png" alt="css revert"><br>很明显后面两项的<code>li</code>样式丢失了，因为<code>li</code>标签默认的属性为<code>diaplay: list-item</code>，改为<code>list-ite</code>后，确实正常了。<br><img src="https://guozhigq.github.io/img/css/css-revert2.png" alt="css revert2"><br>开发中，如果我们需要特意记住元素更改之前的<code>diaplay</code>属性未免太累了点（<code>v-if</code>、<code>v-show</code>不在讨论范围内），有没有什么属性可以在切换时对<code>diaplay</code>进行还原呢？<br>那就是我们将要学习的 <code>revert</code> 属性。</p><h3 id="revert"><a href="#revert" class="headerlink" title="revert"></a>revert</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span><span class="selector-class">.style</span><span class="selector-class">.display</span> = revert;</span><br></pre></td></tr></table></figure><p>revert 关键字</p><blockquote><p>  将属性的级联值从其当前值恢复为当前元素revert的当前样式原点未进行任何更改时属性应具有的值。因此，如果该属性从其父级继承，则它会将属性重置为其继承值，否则重置为由用户代理的样式表（或用户样式，如果存在）建立的默认值。它可以应用于任何CSS属性，包括CSS简写属性。</p></blockquote><p>一句话概括就有，就近还原，如果被<code>revert</code>的属性是继承自父级，则还原为父级。<br>举个🌰</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;p&quot;</span>&gt;</span>文本<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.father</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.p</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>默认情况下<code>p</code>标签内的文本为红色，当我们更改<code>color: revert</code>时，<code>p</code>标签内的文本会变成蓝色，如果<code>p</code>为根元素，则标签内的文本会变成黑色。</p><p>如果想要一次性还原多个属性，可以使用<code>all: revert</code><br><img src="https://guozhigq.github.io/img/css/css-revert3.png" alt="css revert3"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS新特性：@container容器查询</title>
       <link href="/post/d8a09431.html"/>
       <url>/post/d8a09431.html</url>
       
