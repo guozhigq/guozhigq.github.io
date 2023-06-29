@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://guozhigq.github.io/img/css/@container-compatibility.png">
 <meta property="article:published_time" content="2023-06-29T03:03:56.000Z">
-<meta property="article:modified_time" content="2023-06-29T06:44:03.602Z">
+<meta property="article:modified_time" content="2023-06-29T06:49:41.381Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary">
@@ -58,7 +58,7 @@
       <nav>
         
         <div class="search" tabindex="-1">
-          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <input class="search-input" placeholder="搜索文章" type="search" maxlength="64">
           <div class="seach-icon-container">
             <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
@@ -66,8 +66,8 @@
           </div>
           <div class="search-history">
             <div class="search-history-title">
-              <span>Search for History</span>
-              <span class="search-history-clear">Clear</span>
+              <span>搜索历史</span>
+              <span class="search-history-clear">清空</span>
             </div>
             <div class="search-history-list"></div>
           </div>
@@ -139,7 +139,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>1.1k</span>
+            <span>1.2k</span>
           </div>
           
           
@@ -158,7 +158,7 @@
   </div>
   <div class="article-content"><p>又是在网上浏（流）览（浪）的一天 …<br>今天学习css的一个新特性：<code>@container</code>容器查询，其实也不是很新了。（2022年各大浏览器开始支持）<br><img src="https://guozhigq.github.io/img/css/@container-compatibility.png" alt="@container 兼容性"></p>
 <p>提到<strong>查询</strong>，大家是不是首先会想到 <code>@media</code>，</p>
-<h4 id="媒体查询-media"><a href="#媒体查询-media" class="headerlink" title="媒体查询 @media"></a>媒体查询 @media</h4><p>在目前前端响应式方案中，最常见的就是通过<code>@media</code>来实现，比如根据可视窗口的宽高动态改变元素的尺寸或内容。</p>
+<h3 id="媒体查询-media"><a href="#媒体查询-media" class="headerlink" title="媒体查询 @media"></a>媒体查询 @media</h3><p>在目前前端响应式方案中，最常见的就是通过<code>@media</code>来实现，比如根据可视窗口的宽高动态改变元素的尺寸或内容。</p>
 <p><code>@media</code>的使用规则为：</p>
 <figure class="highlight js">
       <div class="code-block-header" lang="js">
@@ -179,9 +179,9 @@
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">600px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.div_1</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">900px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.div_1</span> &#123;</span><br><span class="line">      <span class="attribute">background</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.div_1</span> <span class="selector-tag">p</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>可以看到某些场景下，子元素如果也要根据条件进行响应式，则需要继承父元素的条件，多少有点繁琐了。<br>那么我们是否可以使用 <code>@container</code> 实现呢？</p>
 <p>上述例子可以在<a target="_blank" rel="noopener" href="https://codepen.io/guozhigq/pen/ZEmeqqJ">codepen</a>上查看</p>
-<h4 id="容器查询-container"><a href="#容器查询-container" class="headerlink" title="容器查询 @container"></a>容器查询 @container</h4><p>不同于<code>@media</code>针对于各重媒体类型的查询，<code>@container</code> 针对的是对容器内部元素进行处理。</p>
+<h3 id="容器查询-container"><a href="#容器查询-container" class="headerlink" title="容器查询 @container"></a>容器查询 @container</h3><p>不同于<code>@media</code>针对于各重媒体类型的查询，<code>@container</code> 针对的是对容器内部元素进行处理。</p>
 <p><code>@media</code> 适用于外层，<code>@container</code>适用于内层，<code>@container</code>颗粒度更细</p>
-<p><code>@container</code>的使用规则为：</p>
+<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><p><code>@container</code>的使用规则为：</p>
 <figure class="highlight js">
       <div class="code-block-header" lang="js">
         <span class="copy-code">COPY</span>
@@ -193,7 +193,8 @@
         <span class="copy-code">COPY</span>
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@container</span> (<span class="attribute">width</span> &gt; <span class="number">400px</span>) &#123;</span><br><span class="line">  <span class="selector-tag">h2</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1.5em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以使用以下关键字：</p>
+
+<h4 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h4><p>可以使用以下关键字：</p>
 <ul>
 <li><code>and</code>与条件（同时满足）</li>
 <li><code>or</code>或条件（满足其一即可）</li>
@@ -206,7 +207,7 @@
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 容器宽度大于等于400时生效*/</span></span><br><span class="line"><span class="keyword">@container</span> <span class="keyword">not</span> (<span class="attribute">width</span> &lt; <span class="number">400px</span>) &#123;</span><br><span class="line">  <span class="comment">/* &lt;stylesheet&gt; */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 容器宽度、高度均大于400时生效 */</span></span><br><span class="line"><span class="keyword">@container</span> (<span class="attribute">width</span> &gt; <span class="number">400px</span>) <span class="keyword">and</span> (<span class="attribute">height</span> &gt; <span class="number">400px</span>) &#123;</span><br><span class="line">  <span class="comment">/* &lt;stylesheet&gt; */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 满足其中一个条件及生效 需要container-type: size */</span></span><br><span class="line"><span class="keyword">@container</span> (<span class="attribute">width</span> &gt; <span class="number">400px</span>) <span class="keyword">or</span> (<span class="attribute">height</span> &gt; <span class="number">400px</span>) &#123;</span><br><span class="line">  <span class="comment">/* &lt;stylesheet&gt; */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 暂时未生效 */</span></span><br><span class="line"><span class="keyword">@container</span> (<span class="attribute">width</span> &gt; <span class="number">400px</span>) <span class="keyword">not</span> (<span class="attribute">height</span> &gt; <span class="number">400px</span>) &#123;</span><br><span class="line">  <span class="comment">/* &lt;stylesheet&gt; */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>具体效果见:<a target="_blank" rel="noopener" href="https://codepen.io/guozhigq/pen/oNQZQVj">https://codepen.io/guozhigq/pen/oNQZQVj</a></p>
 <p>在上面的例子中，可能有同学发现我们对于父元素添加了<code>container-type: size</code>属性，那么这个属性又起什么作用呢？</p>
-<p><code>container-type</code>属性定义在父元素中，用来指定查询的范围（条件）<br>主要有以下的值：</p>
+<h4 id="关键属性"><a href="#关键属性" class="headerlink" title="关键属性"></a>关键属性</h4><p><code>container-type</code>属性定义在父元素中，用来指定查询的范围（条件）<br>主要有以下的值：</p>
 <ul>
 <li>size<ul>
 <li>监听父元素的 <strong>宽</strong>、<strong>高</strong> 变化。定义为<code>size</code>后，可以使用<code>width</code>、<code>height</code>的判断条件。<br>可以尝试将例子中的<code>container-type: size</code>改为<code>container-type: inline-size</code>尝试，你会发现与<code>height</code>相关的判断会失效(<code>inline-size</code>监听父元素的 <strong>宽</strong> 的变化)<figure class="highlight css">
@@ -225,7 +226,7 @@
 </ul>
 </li>
 </ul>
-<p>另外的，判断条件除了<code>width</code>、<code>height</code> 之外还有：</p>
+<h4 id="判断条件"><a href="#判断条件" class="headerlink" title="判断条件"></a>判断条件</h4><p>另外的，判断条件除了<code>width</code>、<code>height</code> 之外还有：</p>
 <ul>
 <li>aspect-ratio: 根据父元素的比例进行判断  <figure class="highlight css">
       <div class="code-block-header" lang="css">
@@ -244,6 +245,7 @@
 <li>inline-size: 具体如何使用暂时不清楚</li>
 <li>block-size: 具体如何使用暂时不清楚</li>
 </ul>
+<p>综上，可以看出来<code>@container</code>的判断基于父元素，而<code>@media</code>则基于视图，<code>@container</code>使用更灵活，能够满足更多的使用场景。</p>
 </div>
   
   <div class="article-end">
@@ -252,7 +254,7 @@
       
       
       <div class="article-tags">
-        <div class="article-tags-name">Tags: </div>
+        <div class="article-tags-name">标签: </div>
         
         <a class="article-tags-item" href="/tags/css/">
           css
@@ -269,19 +271,19 @@
   <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm117.134 346.753c-1.592 1.867-39.776 45.731-109.851 45.731-84.692 0-144.484-63.26-144.484-145.567 0-81.303 62.004-143.401 143.762-143.401 66.957 0 101.965 37.315 103.422 38.904a12 12 0 0 1 1.238 14.623l-22.38 34.655c-4.049 6.267-12.774 7.351-18.234 2.295-.233-.214-26.529-23.88-61.88-23.88-46.116 0-73.916 33.575-73.916 76.082 0 39.602 25.514 79.692 74.277 79.692 38.697 0 65.28-28.338 65.544-28.625 5.132-5.565 14.059-5.033 18.508 1.053l24.547 33.572a12.001 12.001 0 0 1-.553 14.866z" />
 </svg></div>
   <div class="post-copyright-author">
-    <span class="post-copyright-meta">Authorship: </span>
+    <span class="post-copyright-meta">作者: </span>
     <span class="post-copyright-info">
       <a href="https://guozhigq.github.io">果汁</a>
     </span>
   </div>
   <div class="post-copyright-type">
-    <span class="post-copyright-meta">Article Link: </span>
+    <span class="post-copyright-meta">文章链接: </span>
     <span class="post-copyright-info">
       <a href="https://guozhigq.github.io/post/d8a09431.html">https://guozhigq.github.io/post/d8a09431.html</a>
     </span>
   </div>
   <div class="post-copyright-notice">
-    <span class="post-copyright-meta">Copyright: </span>
+    <span class="post-copyright-meta">版权声明: </span>
     <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="https://guozhigq.github.io" target="_blank">果汁来一杯</a> !</span>
   </div>
 </div>
@@ -298,10 +300,10 @@
   <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
 </svg>
     </div>
-    <div class="sidebar-title toc-title">Catalog</div>
+    <div class="sidebar-title toc-title">目录</div>
     <div class="sidebar-body">
       <ul class="toc-list">
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2-media"><span class="toc-number">1.</span> <span class="toc-text">媒体查询 @media</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%9F%A5%E8%AF%A2-container"><span class="toc-number">2.</span> <span class="toc-text">容器查询 @container</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2-media"><span class="toc-number">1.</span> <span class="toc-text">媒体查询 @media</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%9F%A5%E8%AF%A2-container"><span class="toc-number">2.</span> <span class="toc-text">容器查询 @container</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">2.2.</span> <span class="toc-text">关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%B1%9E%E6%80%A7"><span class="toc-number">2.3.</span> <span class="toc-text">关键属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.4.</span> <span class="toc-text">判断条件</span></a></li></ol></li></ol>
       </ul>
     </div>
   </div>
@@ -317,10 +319,10 @@
     果汁
   </div>
   <div class="framework-info">
-    <span>Framework</span>
+    <span>框架</span>
     <a href="https://hexo.io" target="_blank">Hexo</a>
     <span class="footer-separator">|</span>
-    <span>Theme</span>
+    <span>主题</span>
     <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
   </div>
   
