@@ -47,7 +47,7 @@
       <nav>
         
         <div class="search" tabindex="-1">
-          <input class="search-input" placeholder="搜索文章" type="search" maxlength="64">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
           <div class="seach-icon-container">
             <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
@@ -55,8 +55,8 @@
           </div>
           <div class="search-history">
             <div class="search-history-title">
-              <span>搜索历史</span>
-              <span class="search-history-clear">清空</span>
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
             </div>
             <div class="search-history-list"></div>
           </div>
@@ -150,48 +150,6 @@
     </div>
   </li>
   
-  <li class="post-item">
-    <div class="post-meta">
-      <div class="post-date">2021.03.05</div>
-      <div class="post-tag">
-        
-        <a href="/tags/vue/" class="post-tag-item">vue</a>
-        
-      </div>
-    </div>
-    <div class="post-content-wrap">
-      <div class="post-content">
-        
-        <a href="/post/a96b66e8.html" class="post-title" >前后端路由的区别</a>
-        <a href="/post/a96b66e8.html" class="post-abstract">什么是路由在区别前后端路由之前，我们先了解一下路由的概念简单来说，路由就是 URL 到函数的映射（这个函数是广义的，可以使前端的函数，也可以是后端的函数）。对于静态资源，可以认为映射函数是对文件的读取操作。对于动态资源，则是对数据库数据的处理、读取操作。什么是后端路由在早期的 web 开发中，后端路由占主导地位。像我们常见的 php、jsp 页面，用户在地址栏中输入 URL 并回车访问的时候...</a>
-        <ul class="post-action-list">
-          
-          
-          <li class="post-action-item post-word">
-            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
-  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
-  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
-</svg>
-            <span>1.5k</span>
-          </li>
-          
-          
-          <li class="post-action-item post-time">
-            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
-  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
-</svg>
-            <span>5min</span>
-          </li>
-          
-          
-        </ul>
-      </div>
-
-      
-    </div>
-  </li>
-  
 </ul>
       </main>
       <aside tabindex="-1">
@@ -206,21 +164,42 @@
   
   
   <div class="sidebar-block categories-wrap">
-    <div class="sidebar-title categories-title">分类</div>
+    <div class="sidebar-title categories-title">Categories</div>
     <div class="sidebar-body">
       <ul class="categories-list">
         
         <li class="categories-item">
+          <a class="categories-link" href="/categories/%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0/">
+            <div class="categories-name">手写实现</div>
+            <div class="categories-count">3</div>
+          </a>
+        </li>
+        
+        <li class="categories-item">
           <a class="categories-link" href="/categories/%E6%95%88%E7%8E%87%E5%BC%80%E5%8F%91/">
             <div class="categories-name">效率开发</div>
+            <div class="categories-count">5</div>
+          </a>
+        </li>
+        
+        <li class="categories-item">
+          <a class="categories-link" href="/categories/%E5%8E%9F%E7%90%86/">
+            <div class="categories-name">原理</div>
             <div class="categories-count">4</div>
+          </a>
+        </li>
+        
+        <li class="categories-item">
+          <a class="categories-link" href="/categories/%E5%AD%A6%E4%B9%A0/">
+            <div class="categories-name">学习</div>
+            <div class="categories-count">2</div>
           </a>
         </li>
         
         <li class="categories-item">
           <a class="categories-link" href="/categories/%E6%8B%93%E5%B1%95/">
             <div class="categories-name">拓展</div>
-            <div class="categories-count">2</div>
+            <div class="categories-count">1</div>
           </a>
         </li>
         
@@ -233,28 +212,28 @@
   
   
   <div class="sidebar-block tags-wrap">
-    <div class="sidebar-title tags-title">标签</div>
+    <div class="sidebar-title tags-title">Tags</div>
     <div class="sidebar-body">
       
-      <a href="/tags/vue/" style="color:#e0aac1;font-size:1.6859347646252845rem">vue</a>
+      <a href="/tags/vue/" style="color:#1ddf0c;font-size:0.9344492109690683rem">vue</a>
       
-      <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color:#b252b2;font-size:1.3478283370917499rem">工程化</a>
+      <a href="/tags/Git/" style="color:#44ed58;font-size:0.01064591312595109rem">Git</a>
       
-      <a href="/tags/git/" style="color:#e75995;font-size:1.659464031185998rem">git</a>
+      <a href="/tags/flutter/" style="color:#bdf5b9;font-size:0.7732155009344739rem">flutter</a>
       
-      <a href="/tags/flutter/" style="color:#e11066;font-size:1.1998175800934412rem">flutter</a>
+      <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color:#48c410;font-size:0.5916939689781961rem">工程化</a>
       
-      <a href="/tags/%E7%BD%91%E7%BB%9C/" style="color:#43f798;font-size:0.3768603600060465rem">网络</a>
+      <a href="/tags/javaScript/" style="color:#ba1496;font-size:0.95483268389845rem">javaScript</a>
       
-      <a href="/tags/Git/" style="color:#ee32da;font-size:1.3529204010346687rem">Git</a>
+      <a href="/tags/%E7%BD%91%E7%BB%9C/" style="color:#4f077a;font-size:0.11213212778530046rem">网络</a>
       
-      <a href="/tags/css/" style="color:#84bf65;font-size:1.7963749882640356rem">css</a>
+      <a href="/tags/css/" style="color:#55f3cb;font-size:0.24463326202244762rem">css</a>
       
-      <a href="/tags/javaScript/" style="color:#d8f028;font-size:0.49520206683294976rem">javaScript</a>
+      <a href="/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/" style="color:#577e65;font-size:0.07947355695918912rem">疑难杂症</a>
       
-      <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="color:#cbb223;font-size:0.3612832677829614rem">小程序</a>
+      <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="color:#22ca46;font-size:0.48762538149049073rem">小程序</a>
       
-      <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color:#acf62d;font-size:0.6522247360151394rem">浏览器</a>
+      <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color:#a11a26;font-size:1.3559821125826463rem">浏览器</a>
       
     </div>
   </div>
@@ -278,10 +257,10 @@
     果汁
   </div>
   <div class="framework-info">
-    <span>框架</span>
+    <span>Framework</span>
     <a href="https://hexo.io" target="_blank">Hexo</a>
     <span class="footer-separator">|</span>
-    <span>主题</span>
+    <span>Theme</span>
     <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
   </div>
   
