@@ -6,16 +6,18 @@
   
   <title>CSS新语法：:has | 果汁来一杯</title>
   <link rel="shortcut icon" href="/img/favicon.png">
-  <meta name="description" content="又是一个css的小知识点 :has看到has，第一反应是js中的has()方法 在Map中的has  Map.prototype.has()has() 方法返回一个布尔值，指示具有指定键的元素是否存在。  12345678const map1 &#x3D; new Map();map1.set(&amp;#x27;bar&amp;#x27;, &amp;#x27;foo&amp;#x27;);console.log(map1.has(&amp;#">
+  <meta name="description" content="又是一个css的小知识点 :has看到has，我的第一反应是javaScript中的has()方法 Map中的has() Map.prototype.has()has() 方法返回一个布尔值，指示具有指定键的元素是否存在。  12345678const map1 &#x3D; new Map();map1.set(&amp;#x27;bar&amp;#x27;, &amp;#x27;foo&amp;#x27;);console.log(m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS新语法：:has">
 <meta property="og:url" content="https://guozhigq.github.io/post/e26ee5bb.html">
 <meta property="og:site_name" content="果汁来一杯">
-<meta property="og:description" content="又是一个css的小知识点 :has看到has，第一反应是js中的has()方法 在Map中的has  Map.prototype.has()has() 方法返回一个布尔值，指示具有指定键的元素是否存在。  12345678const map1 &#x3D; new Map();map1.set(&amp;#x27;bar&amp;#x27;, &amp;#x27;foo&amp;#x27;);console.log(map1.has(&amp;#">
+<meta property="og:description" content="又是一个css的小知识点 :has看到has，我的第一反应是javaScript中的has()方法 Map中的has() Map.prototype.has()has() 方法返回一个布尔值，指示具有指定键的元素是否存在。  12345678const map1 &#x3D; new Map();map1.set(&amp;#x27;bar&amp;#x27;, &amp;#x27;foo&amp;#x27;);console.log(m">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://guozhigq.github.io/img/css/has-or.png">
+<meta property="og:image" content="https://guozhigq.github.io/img/css/has-not-1.png">
+<meta property="og:image" content="https://guozhigq.github.io/img/css/has-not-2.png">
 <meta property="article:published_time" content="2023-06-30T07:16:04.000Z">
-<meta property="article:modified_time" content="2023-06-30T07:57:36.481Z">
+<meta property="article:modified_time" content="2023-06-30T08:25:12.098Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary">
@@ -139,7 +141,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>571</span>
+            <span>691</span>
           </div>
           
           
@@ -156,9 +158,8 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>又是一个css的小知识点 :has<br>看到has，第一反应是js中的has()方法</p>
-<p>在Map中的has</p>
-<blockquote>
+  <div class="article-content"><p>又是一个css的小知识点 :has<br>看到<code>has</code>，我的第一反应是<code>javaScript</code>中的<code>has()</code>方法</p>
+<h3 id="Map中的has"><a href="#Map中的has" class="headerlink" title="Map中的has()"></a><code>Map</code>中的has()</h3><blockquote>
 <p>Map.prototype.has()<br>has() 方法返回一个布尔值，指示具有指定键的元素是否存在。</p>
 </blockquote>
 <figure class="highlight js">
@@ -167,42 +168,61 @@
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map1 = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">map1.<span class="title function_">set</span>(<span class="string">&#x27;bar&#x27;</span>, <span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(map1.<span class="title function_">has</span>(<span class="string">&#x27;bar&#x27;</span>));</span><br><span class="line"><span class="comment">// Expected output: true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(map1.<span class="title function_">has</span>(<span class="string">&#x27;baz&#x27;</span>));</span><br><span class="line"><span class="comment">// Expected output: false</span></span><br></pre></td></tr></table></figure>
 
-<p>类似的，在Set中也有has方法，作用也一样，判断对应的值是否存在于 Set 对象中</p>
+
+<h3 id="Set中的has"><a href="#Set中的has" class="headerlink" title="Set中的has()"></a><code>Set</code>中的has()</h3><blockquote>
+<p>Set.prototype.has()<br>has() 方法返回一个布尔值来指示对应的值是否存在于 Set 对象中。</p>
+</blockquote>
 <figure class="highlight js">
       <div class="code-block-header" lang="js">
         <span class="copy-code">COPY</span>
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> set1 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set1.<span class="title function_">has</span>(<span class="number">1</span>));</span><br><span class="line"><span class="comment">// Expected output: true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set1.<span class="title function_">has</span>(<span class="number">5</span>));</span><br><span class="line"><span class="comment">// Expected output: true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set1.<span class="title function_">has</span>(<span class="number">6</span>));</span><br><span class="line"><span class="comment">// Expected output: false</span></span><br></pre></td></tr></table></figure>
 
-<p>那么CSS中的has是否也是类似作用呢？<br>没错。并且因为他是一个伪类，所以书写格式为 :has</p>
+<h3 id="CSS中的-has"><a href="#CSS中的-has" class="headerlink" title="CSS中的:has()"></a>CSS中的<code>:has()</code></h3><p>见名思义，CSS中的has看来也是同样的作用了。 </p>
 <blockquote>
 <p>CSS 函数式伪类 :has() 表示一个元素，如果作为参数传递的任何相对选择器在锚定到该元素时，至少匹配一个元素。这个伪类通过把可容错相对选择器列表作为参数，提供了一种针对引用元素选择父元素或者先前的兄弟元素的方法。</p>
 </blockquote>
+<p><Strong>简单来说：</Strong><br>当<strong>父级元素</strong>中有符合 <code>:has(xxx)</code> 中xxx条件<strong>子元素</strong>时，会给<strong>父元素</strong>添加上对应的样式，也就是通过<strong>子级</strong>决定<strong>父级</strong>的样式<br>这与我们之前对于CSS的认知是完全相反的，因为一般CSS的规范都是自顶向下，由<strong>父级</strong>到<strong>子级</strong>，由<strong>父级</strong>影响<strong>子级</strong>。</p>
+<p>基本写法：</p>
 <figure class="highlight css">
       <div class="code-block-header" lang="css">
         <span class="copy-code">COPY</span>
       </div>
       <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.class</span> <span class="selector-pseudo">:has</span>(xxx)&#123;</span><br><span class="line">    <span class="comment">/* style */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当A元素中有符合 :has(xxx) 中xxx的条件B元素时，会给A元素添加上对应的样式，也就是通过子级改变父级<br>这与我们之前对于CSS的认知是完全相反的，一般的我们都是通过父级来影响子级。</p>
-<p>举个例子：<br>当card元素中包含有<code>img</code>标签的话，背景色变为蓝色</p>
+
+<p>举个例子：<br>当<code>.card</code>元素中包含有<code>img</code>元素的话，背景色变为蓝色</p>
+<blockquote>
+<p>包含有<code>img</code>元素的<code>.card</code>元素背景变为蓝色</p>
+</blockquote>
 <figure class="highlight css">
       <div class="code-block-header" lang="css">
         <span class="copy-code">COPY</span>
       </div>
-      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">card<span class="selector-pseudo">:has</span>(<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>又或者：<br>当card元素中的<code>a</code>标签处于<code>hover</code>状态时，背景色变为蓝色<br>这样的话，我们在PC端实现一些悬浮下拉菜单时就很容易了。</p>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.card</span><span class="selector-pseudo">:has</span>(<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>又或者：<br>当<code>.card</code>元素中的<code>a</code>元素处于<code>hover</code>状态时，背景色变为蓝色</p>
+<blockquote>
+<p>这样的话，我们在PC端实现一些悬浮下拉菜单时是不是就很简单了呢，甚至不再需要 js</p>
+</blockquote>
 <figure class="highlight css">
       <div class="code-block-header" lang="css">
         <span class="copy-code">COPY</span>
       </div>
-      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">card<span class="selector-pseudo">:has</span>(<span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 当然其他伪类也是可以的 */</span></span><br><span class="line">card<span class="selector-pseudo">:has</span>(<span class="selector-tag">a</span><span class="selector-pseudo">:active</span>)&#123;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然他也支持CSS选择符号，比如直接子元素<code>></code>、相邻兄弟元素<code>+</code></p>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.card</span><span class="selector-pseudo">:has</span>(<span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 当然其他伪类也是可以的 */</span></span><br><span class="line"><span class="selector-class">.card</span><span class="selector-pseudo">:has</span>(<span class="selector-tag">a</span><span class="selector-pseudo">:active</span>)&#123;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="has-常见用法"><a href="#has-常见用法" class="headerlink" title=":has()常见用法"></a><code>:has()</code>常见用法</h3><p>当然他也支持CSS选择符号，比如直接子元素<code>></code>、相邻兄弟元素<code>+</code></p>
 <figure class="highlight css">
       <div class="code-block-header" lang="css">
         <span class="copy-code">COPY</span>
       </div>
-      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 子元素是img的card元素被匹配 */</span></span><br><span class="line">card<span class="selector-pseudo">:has</span>(&gt;<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 相邻兄弟元素是img的card元素被匹配 */</span></span><br><span class="line">card<span class="selector-pseudo">:has</span>( +<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 子元素是img的card元素被匹配 */</span></span><br><span class="line"><span class="selector-class">.card</span><span class="selector-pseudo">:has</span>(&gt;<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 相邻兄弟元素是img的card元素被匹配 */</span></span><br><span class="line"><span class="selector-class">.card</span><span class="selector-pseudo">:has</span>( +<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>多个判断元素：子元素中有<code>img</code>元素或<code>p</code>元素的card元素，注意这里是或的关系，如果想<em>与</em>，可以试试连续两个<code>:has()</code><br><img src="https://guozhigq.github.io/img/css/has-or.png" alt="has的使用"></p>
+<p>也可以跟其他逻辑伪类混用<br><code>:not()</code></p>
+<figure class="highlight css">
+      <div class="code-block-header" lang="css">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">section</span><span class="selector-pseudo">:not</span>(<span class="selector-pseudo">:has</span>(<span class="selector-tag">span</span>)) &#123;</span><br><span class="line">  <span class="attribute">border</span>: skyblue solid;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-pseudo">:has</span>(<span class="selector-pseudo">:not</span>(<span class="selector-tag">span</span>)) &#123;</span><br><span class="line">  <span class="attribute">color</span>: deepskyblue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>乍一看，这两个写法没什么区别，其实<br>第一个表示：没有包含 <span> 元素的 <section> 元素<br>第二个表示：包含不是 <span> 元素的 <section> 元素<br><img src="https://guozhigq.github.io/img/css/has-not-1.png" alt="has-not"><br><img src="https://guozhigq.github.io/img/css/has-not-2.png" alt="has-not"></p>
 </div>
   
   <div class="article-end">
@@ -259,97 +279,20 @@
       </main>
       <aside tabindex="-1">
   
-
-  
-
-  
-  
-
-  
-  
-  
-  <div class="sidebar-block categories-wrap">
-    <div class="sidebar-title categories-title">Categories</div>
+  <div class="sidebar-block sidebar-sticky toc-wrap" tabindex="-1">
+    <div class="toc-btn">
+      <svg class="toc-btn-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+  <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
+</svg>
+    </div>
+    <div class="sidebar-title toc-title">Catalog</div>
     <div class="sidebar-body">
-      <ul class="categories-list">
-        
-        <li class="categories-item">
-          <a class="categories-link" href="/categories/%E5%AD%A6%E4%B9%A0/">
-            <div class="categories-name">学习</div>
-            <div class="categories-count">4</div>
-          </a>
-        </li>
-        
-        <li class="categories-item">
-          <a class="categories-link" href="/categories/%E6%95%88%E7%8E%87%E5%BC%80%E5%8F%91/">
-            <div class="categories-name">效率开发</div>
-            <div class="categories-count">5</div>
-          </a>
-        </li>
-        
-        <li class="categories-item">
-          <a class="categories-link" href="/categories/%E5%8E%9F%E7%90%86/">
-            <div class="categories-name">原理</div>
-            <div class="categories-count">4</div>
-          </a>
-        </li>
-        
-        <li class="categories-item">
-          <a class="categories-link" href="/categories/%E6%8B%93%E5%B1%95/">
-            <div class="categories-name">拓展</div>
-            <div class="categories-count">1</div>
-          </a>
-        </li>
-        
-        <li class="categories-item">
-          <a class="categories-link" href="/categories/%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0/">
-            <div class="categories-name">手写实现</div>
-            <div class="categories-count">3</div>
-          </a>
-        </li>
-        
+      <ul class="toc-list">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map%E4%B8%AD%E7%9A%84has"><span class="toc-number">1.</span> <span class="toc-text">Map中的has()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set%E4%B8%AD%E7%9A%84has"><span class="toc-number">2.</span> <span class="toc-text">Set中的has()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E4%B8%AD%E7%9A%84-has"><span class="toc-number">3.</span> <span class="toc-text">CSS中的:has()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#has-%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">:has()常见用法</span></a></li></ol>
       </ul>
     </div>
   </div>
-  
-
-  
-  
-  
-  <div class="sidebar-block tags-wrap">
-    <div class="sidebar-title tags-title">Tags</div>
-    <div class="sidebar-body">
-      
-      <a href="/tags/css/" style="color:#ca8399;font-size:1.8675731995584592rem">css</a>
-      
-      <a href="/tags/Git/" style="color:#e7de98;font-size:0.6640742698886593rem">Git</a>
-      
-      <a href="/tags/flutter/" style="color:#301610;font-size:0.7643091722953157rem">flutter</a>
-      
-      <a href="/tags/javaScript/" style="color:#1249aa;font-size:1.623864110820111rem">javaScript</a>
-      
-      <a href="/tags/%E7%BD%91%E7%BB%9C/" style="color:#322d1d;font-size:0.8613580648939125rem">网络</a>
-      
-      <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color:#fed9a2;font-size:1.9431100861939505rem">工程化</a>
-      
-      <a href="/tags/vue/" style="color:#299386;font-size:0.5437919094647898rem">vue</a>
-      
-      <a href="/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/" style="color:#d90cbe;font-size:0.31993548981582354rem">疑难杂症</a>
-      
-      <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="color:#9aab30;font-size:1.5861579118062004rem">小程序</a>
-      
-      <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color:#95c250;font-size:0.82438736339373rem">浏览器</a>
-      
-    </div>
-  </div>
-  
-
-  
-  
-  
-
-  
-  
   
 </aside>
     </div>
