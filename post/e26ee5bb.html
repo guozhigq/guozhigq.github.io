@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<head>
+  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+  
+  <title>CSS新语法：:has | 果汁来一杯</title>
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <meta name="description" content="又是一个css的小知识点 :has看到has，第一反应是js中的has()方法 在Map中的has  Map.prototype.has()has() 方法返回一个布尔值，指示具有指定键的元素是否存在。  12345678const map1 &#x3D; new Map();map1.set(&amp;#x27;bar&amp;#x27;, &amp;#x27;foo&amp;#x27;);console.log(map1.has(&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS新语法：:has">
+<meta property="og:url" content="https://guozhigq.github.io/post/e26ee5bb.html">
+<meta property="og:site_name" content="果汁来一杯">
+<meta property="og:description" content="又是一个css的小知识点 :has看到has，第一反应是js中的has()方法 在Map中的has  Map.prototype.has()has() 方法返回一个布尔值，指示具有指定键的元素是否存在。  12345678const map1 &#x3D; new Map();map1.set(&amp;#x27;bar&amp;#x27;, &amp;#x27;foo&amp;#x27;);console.log(map1.has(&amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://guozhigq.github.io/img/css/has-or.png">
+<meta property="article:published_time" content="2023-06-30T07:16:04.000Z">
+<meta property="article:modified_time" content="2023-06-30T07:57:36.481Z">
+<meta property="article:author" content="果汁">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://guozhigq.github.io/img/css/has-or.png">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+<script src="/js/image-preview.js" defer></script>
+
+  
+  
+<script src="/js/main.js" defer></script>
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+<html>
+
+<body>
+  
+  <div class="container">
+    <header class="user-select">
+  <div class="header-container-wrap">
+    <div class="header-container">
+      <!-- 
+      
+      
+      <style>
+        .logo>* {
+          width:auto;height:4rem;border-radius:50%;;
+        }
+      </style>
+      
+      <a href="/" class="logo">
+        <img src="/img/avatar.png" />
+      </a>
+       -->
+      <nav>
+        
+        <div class="search" tabindex="-1">
+          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <div class="seach-icon-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
+</svg>
+          </div>
+          <div class="search-history">
+            <div class="search-history-title">
+              <span>Search for History</span>
+              <span class="search-history-clear">Clear</span>
+            </div>
+            <div class="search-history-list"></div>
+          </div>
+          <div class="search-result"></div>
+          
+          
+<script src="/js/search.js" extname="xml" path="&#x2F;search.xml" async></script>
+
+        </div>
+        
+        
+        
+        
+        <ul class="nav-list">
+          
+          <li class="nav-list-item">
+            <a href="/">Home</a>
+          </li>
+          
+          <li class="nav-list-item">
+            <a target="_blank" rel="noopener" href="https://github.com/guozhigq">Github</a>
+          </li>
+          
+        </ul>
+        <div class="sidebar-nav" tabindex="-1">
+          <svg class="sidebar-nav-btn" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M3,11.335h16M3,6h16M3,16.67h16" transform="translate(-3-3.335)" stroke="currentColor" stroke-width="2" />
+</svg>
+          <div class="mask" tabindex="-1"></div>
+          <ul class="nav-list">
+            
+            <li class="nav-list-item">
+              <a href="/">Home</a>
+            </li>
+            
+            <li class="nav-list-item">
+              <a target="_blank" rel="noopener" href="https://github.com/guozhigq">Github</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+    <div class="main-wrap">
+      <main class="main-width">
+        
+        <h1 class="page-title">CSS新语法：:has</h1>
+        
+        <article class="article page">
+  <div class="article-info">
+    
+    <img src="/img/avatar.png" alt="avatar" class="avatar">
+    
+    <div class="article-meta">
+      <div class="author-name">果汁</div>
+      <div class="article-meta-list">
+        
+        <time datetime="2023-06-30 15:16:04" title="2023-06-30 15:16:04" class="time">
+          2023-06-30 15:16:04
+        </time>
+        
+        <div class="article-meta-item-wrap">
+          
+          <div class="article-meta-item">
+            <svg class="word-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" >
+  <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
+  <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
+</svg>
+            <span>571</span>
+          </div>
+          
+          
+          <div class="article-meta-item">
+            <svg class="time-icon" width="16" height="16" viewBox="0 0 48 48" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
+  <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
+</svg>
+            <span>2min</span>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="article-content"><p>又是一个css的小知识点 :has<br>看到has，第一反应是js中的has()方法</p>
+<p>在Map中的has</p>
+<blockquote>
+<p>Map.prototype.has()<br>has() 方法返回一个布尔值，指示具有指定键的元素是否存在。</p>
+</blockquote>
+<figure class="highlight js">
+      <div class="code-block-header" lang="js">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map1 = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line">map1.<span class="title function_">set</span>(<span class="string">&#x27;bar&#x27;</span>, <span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(map1.<span class="title function_">has</span>(<span class="string">&#x27;bar&#x27;</span>));</span><br><span class="line"><span class="comment">// Expected output: true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(map1.<span class="title function_">has</span>(<span class="string">&#x27;baz&#x27;</span>));</span><br><span class="line"><span class="comment">// Expected output: false</span></span><br></pre></td></tr></table></figure>
+
+<p>类似的，在Set中也有has方法，作用也一样，判断对应的值是否存在于 Set 对象中</p>
+<figure class="highlight js">
+      <div class="code-block-header" lang="js">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> set1 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set1.<span class="title function_">has</span>(<span class="number">1</span>));</span><br><span class="line"><span class="comment">// Expected output: true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set1.<span class="title function_">has</span>(<span class="number">5</span>));</span><br><span class="line"><span class="comment">// Expected output: true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(set1.<span class="title function_">has</span>(<span class="number">6</span>));</span><br><span class="line"><span class="comment">// Expected output: false</span></span><br></pre></td></tr></table></figure>
+
+<p>那么CSS中的has是否也是类似作用呢？<br>没错。并且因为他是一个伪类，所以书写格式为 :has</p>
+<blockquote>
+<p>CSS 函数式伪类 :has() 表示一个元素，如果作为参数传递的任何相对选择器在锚定到该元素时，至少匹配一个元素。这个伪类通过把可容错相对选择器列表作为参数，提供了一种针对引用元素选择父元素或者先前的兄弟元素的方法。</p>
+</blockquote>
+<figure class="highlight css">
+      <div class="code-block-header" lang="css">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.class</span> <span class="selector-pseudo">:has</span>(xxx)&#123;</span><br><span class="line">    <span class="comment">/* style */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当A元素中有符合 :has(xxx) 中xxx的条件B元素时，会给A元素添加上对应的样式，也就是通过子级改变父级<br>这与我们之前对于CSS的认知是完全相反的，一般的我们都是通过父级来影响子级。</p>
+<p>举个例子：<br>当card元素中包含有<code>img</code>标签的话，背景色变为蓝色</p>
+<figure class="highlight css">
+      <div class="code-block-header" lang="css">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">card<span class="selector-pseudo">:has</span>(<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>又或者：<br>当card元素中的<code>a</code>标签处于<code>hover</code>状态时，背景色变为蓝色<br>这样的话，我们在PC端实现一些悬浮下拉菜单时就很容易了。</p>
+<figure class="highlight css">
+      <div class="code-block-header" lang="css">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">card<span class="selector-pseudo">:has</span>(<span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 当然其他伪类也是可以的 */</span></span><br><span class="line">card<span class="selector-pseudo">:has</span>(<span class="selector-tag">a</span><span class="selector-pseudo">:active</span>)&#123;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然他也支持CSS选择符号，比如直接子元素<code>></code>、相邻兄弟元素<code>+</code></p>
+<figure class="highlight css">
+      <div class="code-block-header" lang="css">
+        <span class="copy-code">COPY</span>
+      </div>
+      <table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 子元素是img的card元素被匹配 */</span></span><br><span class="line">card<span class="selector-pseudo">:has</span>(&gt;<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 相邻兄弟元素是img的card元素被匹配 */</span></span><br><span class="line">card<span class="selector-pseudo">:has</span>( +<span class="selector-tag">img</span>)&#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>多个判断元素：子元素中有<code>img</code>元素或<code>p</code>元素的card元素，注意这里是或的关系，如果想<em>与</em>，可以试试连续两个<code>:has()</code><br><img src="https://guozhigq.github.io/img/css/has-or.png" alt="has的使用"></p>
+</div>
+  
+  <div class="article-end">
+    
+    <div class="article-meta">
+      
+      <div class="article-categories">
+        <div class="article-categories-name">Categories: </div>
+        
+        <a class="article-categories-item" href="/categories/%E5%AD%A6%E4%B9%A0/">
+          学习
+        </a>
+        
+      </div>
+      
+      
+      <div class="article-tags">
+        <div class="article-tags-name">Tags: </div>
+        
+        <a class="article-tags-item" href="/tags/css/">
+          css
+        </a>
+        
+      </div>
+      
+    </div>
+    
+    
+
+<div class="post-copyright">
+  <div class="post-copyright-icon"><svg class="copyright-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm117.134 346.753c-1.592 1.867-39.776 45.731-109.851 45.731-84.692 0-144.484-63.26-144.484-145.567 0-81.303 62.004-143.401 143.762-143.401 66.957 0 101.965 37.315 103.422 38.904a12 12 0 0 1 1.238 14.623l-22.38 34.655c-4.049 6.267-12.774 7.351-18.234 2.295-.233-.214-26.529-23.88-61.88-23.88-46.116 0-73.916 33.575-73.916 76.082 0 39.602 25.514 79.692 74.277 79.692 38.697 0 65.28-28.338 65.544-28.625 5.132-5.565 14.059-5.033 18.508 1.053l24.547 33.572a12.001 12.001 0 0 1-.553 14.866z" />
+</svg></div>
+  <div class="post-copyright-author">
+    <span class="post-copyright-meta">Authorship: </span>
+    <span class="post-copyright-info">
+      <a href="https://guozhigq.github.io">果汁</a>
+    </span>
+  </div>
+  <div class="post-copyright-type">
+    <span class="post-copyright-meta">Article Link: </span>
+    <span class="post-copyright-info">
+      <a href="https://guozhigq.github.io/post/e26ee5bb.html">https://guozhigq.github.io/post/e26ee5bb.html</a>
+    </span>
+  </div>
+  <div class="post-copyright-notice">
+    <span class="post-copyright-meta">Copyright: </span>
+    <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="https://guozhigq.github.io" target="_blank">果汁来一杯</a> !</span>
+  </div>
+</div>
+
+  </div>
+</article>
+      </main>
+      <aside tabindex="-1">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  <div class="sidebar-block categories-wrap">
+    <div class="sidebar-title categories-title">Categories</div>
+    <div class="sidebar-body">
+      <ul class="categories-list">
+        
+        <li class="categories-item">
+          <a class="categories-link" href="/categories/%E5%AD%A6%E4%B9%A0/">
+            <div class="categories-name">学习</div>
+            <div class="categories-count">4</div>
+          </a>
+        </li>
+        
+        <li class="categories-item">
+          <a class="categories-link" href="/categories/%E6%95%88%E7%8E%87%E5%BC%80%E5%8F%91/">
+            <div class="categories-name">效率开发</div>
+            <div class="categories-count">5</div>
+          </a>
+        </li>
+        
+        <li class="categories-item">
+          <a class="categories-link" href="/categories/%E5%8E%9F%E7%90%86/">
+            <div class="categories-name">原理</div>
+            <div class="categories-count">4</div>
+          </a>
+        </li>
+        
+        <li class="categories-item">
+          <a class="categories-link" href="/categories/%E6%8B%93%E5%B1%95/">
+            <div class="categories-name">拓展</div>
+            <div class="categories-count">1</div>
+          </a>
+        </li>
+        
+        <li class="categories-item">
+          <a class="categories-link" href="/categories/%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0/">
+            <div class="categories-name">手写实现</div>
+            <div class="categories-count">3</div>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+
+  
+  
+  
+  <div class="sidebar-block tags-wrap">
+    <div class="sidebar-title tags-title">Tags</div>
+    <div class="sidebar-body">
+      
+      <a href="/tags/css/" style="color:#ca8399;font-size:1.8675731995584592rem">css</a>
+      
+      <a href="/tags/Git/" style="color:#e7de98;font-size:0.6640742698886593rem">Git</a>
+      
+      <a href="/tags/flutter/" style="color:#301610;font-size:0.7643091722953157rem">flutter</a>
+      
+      <a href="/tags/javaScript/" style="color:#1249aa;font-size:1.623864110820111rem">javaScript</a>
+      
+      <a href="/tags/%E7%BD%91%E7%BB%9C/" style="color:#322d1d;font-size:0.8613580648939125rem">网络</a>
+      
+      <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="color:#fed9a2;font-size:1.9431100861939505rem">工程化</a>
+      
+      <a href="/tags/vue/" style="color:#299386;font-size:0.5437919094647898rem">vue</a>
+      
+      <a href="/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/" style="color:#d90cbe;font-size:0.31993548981582354rem">疑难杂症</a>
+      
+      <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="color:#9aab30;font-size:1.5861579118062004rem">小程序</a>
+      
+      <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="color:#95c250;font-size:0.82438736339373rem">浏览器</a>
+      
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+  
+  
+  
+</aside>
+    </div>
+    
+    
+
+<footer class="footer main-width">
+  <div class="copyright">
+    &copy; 2019 - 2023
+    果汁
+  </div>
+  <div class="framework-info">
+    <span>Framework</span>
+    <a href="https://hexo.io" target="_blank">Hexo</a>
+    <span class="footer-separator">|</span>
+    <span>Theme</span>
+    <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
+  </div>
+  
+  <div class="custom">A clean and lightweight Hexo theme</div>
+  
+</footer>
+  </div>
+  
+</body>
+
+</html>
