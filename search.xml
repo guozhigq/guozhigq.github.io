@@ -123,6 +123,25 @@
     
     
     <entry>
+      <title>git小技巧</title>
+      <link href="/post/b120bc47.html"/>
+      <url>/post/b120bc47.html</url>
+      
+        <content type="html"><![CDATA[<p>Q：本地分支develop不小心被删了，怎么办 ！！？<br>A：不要慌，使用 <code>git branch new_develop 5fs3424</code> 重新创建一个新分支，那個 <code>5fs3424</code>  是怎么来的。通常在删掉分支的时候，会有这样的提示：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -D develop</span><br><span class="line">Deleted branch develop (was 5fs3424).</span><br></pre></td></tr></table></figure><p>Q：A分支想要合并B分支的某个commit ？<br>A：在A分支上 <code>git cherry-pick 5fs3424</code>，<code>5fs3424</code>为B分支上commit值，当然也可以接多个～</p><p>Q：敲了一半代码， 要切另一个分支改紧急bug怎么办 ？<br>A：可以使用 <code>git stash</code> 将目前的进度保存，等切回分支后再使用 <code>git stash pop</code> 找回，<code>git stash list</code> 可以查看目前已保存的多个进度。<br>也可以使用 <code>git commit</code> 提交到本地仓库，等切回分支后再使用 <code>git reset</code> 把 commit 拆开来继续做。</p><p>Q: git swith切换分支<br>A: 为了避免在使用 <code>git checkout</code>命令切换分支跟恢复文件等功能产生混淆，git 2.23 版本新增了 <code>switch</code> 命令，用于切换分支。<br>具体使用如下：</p><ol><li>切换分支</li></ol><ul><li><code>git switch branch_a</code>表示切换到<code>branch_a</code>分支</li></ul><ol start="2"><li>创建新分支并切换到改分支：</li></ol><ul><li><code>git switch -c branch_a</code>表示创建新的<code>branch_a</code>分支并进行切换，等同于 <code>git checkout -b branch_a</code></li></ul><ol start="3"><li>以某个commit创建分支：</li></ol><ul><li>根据<code>git log</code>获取到某个<code>commitId</code>，执行<code>git switch branch_a commitId</code>，表示基于<code>commitId</code>创建一个新分支<code>branch_a</code></li></ul><ol start="4"><li>以某个tag创建分支：</li></ol><ul><li><code>git switch branch_a tag</code> 与<strong>以某个commit 创建分支</strong>大致相同，只不过<code>commitId</code>需要改为某个<code>tag</code></li></ul><ol start="5"><li>切换到上一个分支： <code>git switch -</code></li></ol><ul><li>当我们在<code>branch_a</code>分支使用<code>git switch branch_b</code>切换到<code>branch_b</code>分支后，使用<code>git switch -</code>即可再次切换回<code>branch_a</code>分支，到了<code>branch_a</code>分支使用<code>git switch -</code>切换回<code>branch_b</code>，也就是在两个分支之间来回切换</li></ul></br>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>聊聊事件循环机制</title>
       <link href="/post/8f637f35.html"/>
       <url>/post/8f637f35.html</url>
