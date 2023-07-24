@@ -6,16 +6,16 @@
   
   <title>浏览器缓存 | 果汁来一杯</title>
   <link rel="shortcut icon" href="/img/favicon.png">
-  <meta name="description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 当我们首次向服务端发起请求时，由于本地没有缓存结果及标识，所以直接向服务端发起请求，服务器会在响应报文的HTTP头中增加缓存标识，客户端即浏览器会根据缓存标识来决定是否缓存结果，需要缓存则将请求结果和缓存标识存入浏览器缓存。 在每次在发起请求时，都会在浏览器缓存中先检查是否有请求结果以及缓存标识根据有无请求结果及缓存标识，做以下判断：  无缓">
+  <meta name="description" content="浏览器缓存主要分为强缓存、协商缓存、启发式缓存，下面进行详细说明。 当我们首次向服务端发起请求时，由于本地没有缓存结果及标识，所以直接向服务端发起请求，服务器会在响应报文的HTTP头中增加缓存标识，客户端即浏览器会根据缓存标识来决定是否缓存结果，需要缓存则将请求结果和缓存标识存入浏览器缓存。 在每次在发起请求时，都会在浏览器缓存中先检查是否有请求结果以及缓存标识根据有无请求结果及缓存标识，做以下判">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器缓存">
 <meta property="og:url" content="https://guozhigq.github.io/post/be7c79f7.html">
 <meta property="og:site_name" content="果汁来一杯">
-<meta property="og:description" content="浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。 当我们首次向服务端发起请求时，由于本地没有缓存结果及标识，所以直接向服务端发起请求，服务器会在响应报文的HTTP头中增加缓存标识，客户端即浏览器会根据缓存标识来决定是否缓存结果，需要缓存则将请求结果和缓存标识存入浏览器缓存。 在每次在发起请求时，都会在浏览器缓存中先检查是否有请求结果以及缓存标识根据有无请求结果及缓存标识，做以下判断：  无缓">
+<meta property="og:description" content="浏览器缓存主要分为强缓存、协商缓存、启发式缓存，下面进行详细说明。 当我们首次向服务端发起请求时，由于本地没有缓存结果及标识，所以直接向服务端发起请求，服务器会在响应报文的HTTP头中增加缓存标识，客户端即浏览器会根据缓存标识来决定是否缓存结果，需要缓存则将请求结果和缓存标识存入浏览器缓存。 在每次在发起请求时，都会在浏览器缓存中先检查是否有请求结果以及缓存标识根据有无请求结果及缓存标识，做以下判">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://guozhigq.github.io/img/brower_cache.png">
 <meta property="article:published_time" content="2022-05-15T07:24:57.000Z">
-<meta property="article:modified_time" content="2023-06-07T01:43:11.454Z">
+<meta property="article:modified_time" content="2023-07-24T08:54:09.712Z">
 <meta property="article:author" content="果汁">
 <meta property="article:tag" content="浏览器">
 <meta name="twitter:card" content="summary">
@@ -58,7 +58,7 @@
       <nav>
         
         <div class="search" tabindex="-1">
-          <input class="search-input" placeholder="Search for articles" type="search" maxlength="64">
+          <input class="search-input" placeholder="搜索文章" type="search" maxlength="64">
           <div class="seach-icon-container">
             <svg class="search-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M12.4008 12.4008C14.744 10.0577 14.744 6.25871 12.4008 3.91556C10.0577 1.57242 6.25871 1.57242 3.91556 3.91556C1.57242 6.25871 1.57242 10.0577 3.91556 12.4008C6.25871 14.744 10.0577 14.744 12.4008 12.4008ZM12.4008 12.4008L15.5828 15.5828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"></path>
@@ -66,8 +66,8 @@
           </div>
           <div class="search-history">
             <div class="search-history-title">
-              <span>Search for History</span>
-              <span class="search-history-clear">Clear</span>
+              <span>搜索历史</span>
+              <span class="search-history-clear">清空</span>
             </div>
             <div class="search-history-list"></div>
           </div>
@@ -139,7 +139,7 @@
   <path d="M10 4H30L40 14V42C40 43.1046 39.1046 44 38 44H10C8.89543 44 8 43.1046 8 42V6C8 4.89543 8.89543 4 10 4Z"></path>
   <path d="M16.0083 20L19.0083 34L24.0083 24L29.0083 34L32.0083 20"></path>
 </svg>
-            <span>1.4k</span>
+            <span>1.5k</span>
           </div>
           
           
@@ -148,7 +148,7 @@
   <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" />
   <path d="M24.0084 12.0001L24.0072 24.0089L32.4866 32.4883" />
 </svg>
-            <span>4min</span>
+            <span>5min</span>
           </div>
           
         </div>
@@ -156,7 +156,7 @@
       </div>
     </div>
   </div>
-  <div class="article-content"><p>浏览器缓存主要分为强缓存、协商缓存，下面进行详细说明。</p>
+  <div class="article-content"><p>浏览器缓存主要分为强缓存、协商缓存、启发式缓存，下面进行详细说明。</p>
 <p>当我们首次向服务端发起请求时，由于本地没有缓存结果及标识，所以直接向服务端发起请求，服务器会在响应报文的HTTP头中增加缓存标识，客户端即浏览器会根据缓存标识来决定是否缓存结果，需要缓存则将请求结果和缓存标识存入浏览器缓存。</p>
 <p>在每次在发起请求时，都会在浏览器缓存中先检查是否有请求结果以及缓存标识<br>根据有无请求结果及缓存标识，做以下判断：</p>
 <ol>
@@ -191,6 +191,7 @@
 <p>ETag是资源的唯一标识，可以是资源的哈希值、版本号等，随着资源内容生成。</p>
 <p>服务端在响应头中返回 <code>ETag</code> 字段表示资源的唯一性，通常是一个唯一的字符串。当客户端发送请求时，在请求头中携带 <code>If-None-Match</code> 字段（值为上次获取资源时服务端返回 <code>ETag</code>）。服务端接收到请求后，会将 <code>If-None-Match</code> 与服务端资源最新资源的标识进行比较。如果标识符相同，响应 <code>304 Not Modified</code>，告知客户端可以使用本地缓存。否则，响应<code>200 OK</code>，返回最新的资源以及<code>ETag</code>。</p>
 <p><img src="https://guozhigq.github.io/img/brower_cache.png" alt="brower cache"></p>
+<h2 id="启发式缓存"><a href="#启发式缓存" class="headerlink" title="启发式缓存"></a>启发式缓存</h2><p>启发式缓存是浏览器自己的一种缓存策略，当服务端没有返回缓存标识，或者每次返回相同值的缓存标识时，浏览器会自己计算缓存有效期，在该有效期内，使用类似强缓存的缓存策略，直接从本地读取缓存。具体计算规则为：(new Date() - Last-modified-since) * 10%</p>
 <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
 <li>强缓存不会发起请求；协商缓存至少发起一次请求</li>
 <li>🎯命中强缓存，Http状态码为<code>灰色的200</code>；🎯命中协商缓存，Http状态码为<code>304</code></li>
@@ -209,7 +210,7 @@
       
       
       <div class="article-tags">
-        <div class="article-tags-name">Tags: </div>
+        <div class="article-tags-name">标签: </div>
         
         <a class="article-tags-item" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">
           浏览器
@@ -226,19 +227,19 @@
   <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm117.134 346.753c-1.592 1.867-39.776 45.731-109.851 45.731-84.692 0-144.484-63.26-144.484-145.567 0-81.303 62.004-143.401 143.762-143.401 66.957 0 101.965 37.315 103.422 38.904a12 12 0 0 1 1.238 14.623l-22.38 34.655c-4.049 6.267-12.774 7.351-18.234 2.295-.233-.214-26.529-23.88-61.88-23.88-46.116 0-73.916 33.575-73.916 76.082 0 39.602 25.514 79.692 74.277 79.692 38.697 0 65.28-28.338 65.544-28.625 5.132-5.565 14.059-5.033 18.508 1.053l24.547 33.572a12.001 12.001 0 0 1-.553 14.866z" />
 </svg></div>
   <div class="post-copyright-author">
-    <span class="post-copyright-meta">Authorship: </span>
+    <span class="post-copyright-meta">作者: </span>
     <span class="post-copyright-info">
       <a href="https://guozhigq.github.io">果汁</a>
     </span>
   </div>
   <div class="post-copyright-type">
-    <span class="post-copyright-meta">Article Link: </span>
+    <span class="post-copyright-meta">文章链接: </span>
     <span class="post-copyright-info">
       <a href="https://guozhigq.github.io/post/be7c79f7.html">https://guozhigq.github.io/post/be7c79f7.html</a>
     </span>
   </div>
   <div class="post-copyright-notice">
-    <span class="post-copyright-meta">Copyright: </span>
+    <span class="post-copyright-meta">版权声明: </span>
     <span class="post-copyright-info">All posts on this blog are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> license unless otherwise stated. Please cite <a href="https://guozhigq.github.io" target="_blank">果汁来一杯</a> !</span>
   </div>
 </div>
@@ -255,10 +256,10 @@
   <path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z"></path>
 </svg>
     </div>
-    <div class="sidebar-title toc-title">Catalog</div>
+    <div class="sidebar-title toc-title">目录</div>
     <div class="sidebar-body">
       <ul class="toc-list">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">强缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Expires"><span class="toc-number">1.0.1.</span> <span class="toc-text">Expires</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache-Control"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cache-Control</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Last-Modified-%E5%92%8C-If-Modified-Since"><span class="toc-number">2.0.1.</span> <span class="toc-text">Last-Modified 和 If-Modified-Since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ETag-%E5%92%8C-If-None-Match"><span class="toc-number">2.0.2.</span> <span class="toc-text">ETag 和 If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">使用场景</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">强缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Expires"><span class="toc-number">1.0.1.</span> <span class="toc-text">Expires</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cache-Control"><span class="toc-number">1.0.2.</span> <span class="toc-text">Cache-Control</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">协商缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Last-Modified-%E5%92%8C-If-Modified-Since"><span class="toc-number">2.0.1.</span> <span class="toc-text">Last-Modified 和 If-Modified-Since</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ETag-%E5%92%8C-If-None-Match"><span class="toc-number">2.0.2.</span> <span class="toc-text">ETag 和 If-None-Match</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8F%91%E5%BC%8F%E7%BC%93%E5%AD%98"><span class="toc-number">3.</span> <span class="toc-text">启发式缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">4.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">5.</span> <span class="toc-text">使用场景</span></a></li></ol>
       </ul>
     </div>
   </div>
@@ -274,10 +275,10 @@
     果汁
   </div>
   <div class="framework-info">
-    <span>Framework</span>
+    <span>框架</span>
     <a href="https://hexo.io" target="_blank">Hexo</a>
     <span class="footer-separator">|</span>
-    <span>Theme</span>
+    <span>主题</span>
     <a href="https://github.com/Lete114/hexo-theme-MengD" target="_blank">MengD</a>
   </div>
   
